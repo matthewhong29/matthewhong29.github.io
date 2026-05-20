@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Matthew Hong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0a0f1e;
+    --navy-2: #111827;
+    --navy-3: #1e2a3a;
+    --accent: #e8c547;
+    --accent-dim: rgba(232,197,71,0.12);
+    --accent-dim2: rgba(232,197,71,0.06);
+    --white: #f5f2eb;
+    --white-dim: rgba(245,242,235,0.6);
+    --white-dimmer: rgba(245,242,235,0.25);
+    --border: rgba(245,242,235,0.08);
+    --border-accent: rgba(232,197,71,0.3);
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Outfit', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  /* ── PAGE ── */
+  .page-wrapper {
+    padding: 8rem 4rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .page-header-left { }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .page-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .page-subtitle {
+    font-size: 0.88rem;
+    color: var(--white-dimmer);
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--navy);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: opacity 0.2s, transform 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border-accent);
+    color: var(--accent);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    background: transparent;
+  }
+  .btn-outline:hover { background: var(--accent-dim); transform: translateY(-1px); }
+
+  /* ── PDF VIEWER ── */
+  .pdf-container {
+    background: var(--navy-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pdf-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.5rem;
+    background: var(--navy-3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pdf-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pdf-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .pdf-dot:first-child { background: rgba(255,90,90,0.5); }
+  .pdf-dot:nth-child(2) { background: rgba(255,190,50,0.5); }
+  .pdf-dot:nth-child(3) { background: rgba(50,200,100,0.5); }
+
+  .pdf-filename {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--white-dimmer);
+    letter-spacing: 0.08em;
+    margin-left: 0.5rem;
+  }
+
+  .pdf-toolbar-right {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--white-dimmer);
+    letter-spacing: 0.08em;
+  }
+
+  .pdf-embed-wrap {
+    width: 100%;
+    height: 80vh;
+    min-height: 600px;
+    position: relative;
+  }
+
+  .pdf-embed-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Fallback shown when PDF doesn't load */
+  .pdf-fallback {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    height: 100%;
+    min-height: 400px;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .pdf-fallback-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.4;
+  }
+
+  .pdf-fallback p {
+    font-size: 0.9rem;
+    color: var(--white-dimmer);
+    max-width: 360px;
+    line-height: 1.7;
+  }
+
+  /* ── LAST UPDATED ── */
+  .resume-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .resume-meta-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--white-dimmer);
+    letter-spacing: 0.08em;
+  }
+
+  .resume-meta-link {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-accent);
+    padding-bottom: 1px;
+    transition: opacity 0.2s;
+  }
+  .resume-meta-link:hover { opacity: 0.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 5rem;
+  }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--white-dimmer);
+    letter-spacing: 0.08em;
+  }
+  .footer-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--white-dimmer);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .page-wrapper { padding: 7rem 1.5rem 4rem; }
+    .page-header { flex-direction: column; align-items: flex-start; }
+    .pdf-embed-wrap { height: 60vh; min-height: 400px; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">MH / 2029</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN -->
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-left">
+      <span class="section-label">Curriculum Vitae</span>
+      <h1 class="page-title">Matthew <em>Hong</em></h1>
+      <p class="page-subtitle">Mechanical Engineering · Northeastern University · Class of 2029</p>
+    </div>
+    <div class="header-actions">
+      <a href="resume.pdf" download="Matthew_Hong_Resume.pdf" class="btn-primary">
+        ↓ Download PDF
+      </a>
+      <a href="index.html#contact" class="btn-outline">
+        Contact ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- PDF VIEWER -->
+  <div class="pdf-container">
+    <div class="pdf-toolbar">
+      <div class="pdf-toolbar-left">
+        <div class="pdf-dot"></div>
+        <div class="pdf-dot"></div>
+        <div class="pdf-dot"></div>
+        <span class="pdf-filename">Matthew_Hong_Resume.pdf</span>
+      </div>
+      <div class="pdf-toolbar-right">RESUME · 2026</div>
+    </div>
+    <div class="pdf-embed-wrap" id="pdfWrap">
+      <iframe
+        src="resume.pdf"
+        title="Matthew Hong Resume"
+        id="pdfFrame"
+      ></iframe>
+      <div class="pdf-fallback" id="pdfFallback">
+        <div class="pdf-fallback-icon">⬡</div>
+        <p>PDF preview unavailable in this browser. Use the download button above to view the full resume.</p>
+        <a href="resume.pdf" download="Matthew_Hong_Resume.pdf" class="btn-primary">↓ Download Resume</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-meta">
+    <span class="resume-meta-note">Last updated · 2026</span>
+    <a href="index.html" class="resume-meta-link">← Back to Portfolio</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Matthew Hong</span>
+  <span class="footer-tag">Northeastern University · Class of 2029</span>
+</footer>
+
+<script>
+  const frame = document.getElementById('pdfFrame');
+  const fallback = document.getElementById('pdfFallback');
+  const wrap = document.getElementById('pdfWrap');
+
+  frame.addEventListener('error', () => {
+    frame.style.display = 'none';
+    fallback.style.display = 'flex';
+  });
+
+  setTimeout(() => {
+    try {
+      if (!frame.contentDocument && !frame.contentWindow) {
+        frame.style.display = 'none';
+        fallback.style.display = 'flex';
+      }
+    } catch(e) {
+      // cross-origin, PDF is likely loading fine
+    }
+  }, 3000);
+</script>
+
+</body>
+</html>
