@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quanta Labs — Matthew Hong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0a0f1e;--navy-2:#111827;--navy-3:#1e2a3a;--accent:#e8c547;--accent-dim:rgba(232,197,71,0.12);--accent-dim2:rgba(232,197,71,0.06);--white:#f5f2eb;--white-dim:rgba(245,242,235,0.6);--white-dimmer:rgba(245,242,235,0.25);--border:rgba(245,242,235,0.08);--border-accent:rgba(232,197,71,0.3);--serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;}
+html{scroll-behavior:smooth}body{background:var(--navy);color:var(--white);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(10,15,30,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:0.85rem;color:var(--accent);letter-spacing:0.12em;text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.page-wrap{max-width:1100px;margin:0 auto;padding:8rem 4rem 5rem}
+.breadcrumb{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;color:var(--white-dimmer)}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.hero-header{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.section-label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;display:block}
+.page-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;color:var(--white);margin-bottom:0.6rem}
+.page-title em{font-style:italic;color:var(--accent)}
+.page-subtitle{font-size:0.9rem;color:var(--white-dimmer);font-family:var(--mono);letter-spacing:0.05em;margin-bottom:1.25rem}
+.badges{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem}
+.badge{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;padding:0.3rem 0.8rem;border-radius:2px;border:1px solid var(--border-accent);color:var(--accent);background:var(--accent-dim2)}
+.badge-yellow{border-color:rgba(232,197,71,0.4);color:var(--accent);background:var(--accent-dim)}
+.proj-section{padding:3rem 0;border-bottom:1px solid var(--border)}
+.proj-section:last-of-type{border-bottom:none}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2vw,1.8rem);color:var(--white);margin-bottom:1.25rem;line-height:1.15}
+.body-text{font-size:0.92rem;color:var(--white-dim);line-height:1.85;max-width:720px}
+.body-text p+p{margin-top:1rem}
+.body-text strong{color:var(--white);font-weight:500}
+.img-grid{display:grid;gap:4px;margin-top:1.5rem;border-radius:4px;overflow:hidden}
+.img-grid.cols-2{grid-template-columns:1fr 1fr}
+.img-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.img-caption{font-family:var(--mono);font-size:0.68rem;color:var(--white-dimmer);letter-spacing:0.08em;margin-top:0.5rem}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem}
+.spec-card{background:var(--navy-2);border:1px solid var(--border);border-radius:4px;padding:1.25rem;transition:border-color 0.3s}
+.spec-card:hover{border-color:var(--border-accent)}
+.spec-title{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.spec-list{list-style:none;display:flex;flex-direction:column;gap:0.45rem}
+.spec-list li{font-size:0.82rem;color:var(--white-dim);display:flex;align-items:flex-start;gap:0.5rem}
+.spec-list li::before{content:'→';color:var(--accent);font-size:0.72rem;flex-shrink:0;margin-top:0.1rem}
+.future-box{margin-top:2rem;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:4px;padding:1.5rem 2rem}
+.future-box-title{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+.future-box-body{font-size:0.88rem;color:var(--white-dim);line-height:1.75}
+.cta-row{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
+.btn-primary{display:inline-block;background:var(--accent);color:var(--navy);font-family:var(--sans);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.85rem 2rem;text-decoration:none;border-radius:2px;transition:opacity 0.2s,transform 0.2s}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-outline{display:inline-block;border:1px solid var(--border-accent);color:var(--accent);font-family:var(--sans);font-weight:500;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.85rem 2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s}
+.btn-outline:hover{background:var(--accent-dim);transform:translateY(-1px)}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;margin-top:4rem}
+.footer-copy{font-family:var(--mono);font-size:0.72rem;color:var(--white-dimmer);letter-spacing:0.08em}
+@media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.page-wrap{padding:7rem 1.5rem 4rem}.img-grid.cols-2{grid-template-columns:1fr}footer{flex-direction:column;gap:0.5rem;padding:1.5rem}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">MH / 2029</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<div class="page-wrap">
+  <div class="breadcrumb fade-up"><a href="index.html">Portfolio</a><span>/</span><span>Experience</span><span>/</span><span>Quanta Labs</span></div>
+  <div class="hero-header fade-up">
+    <span class="section-label">Professional Experience</span>
+    <h1 class="page-title">Quanta <em>Labs</em></h1>
+    <p class="page-subtitle">Intern — Shock and Vibration Team · Santa Clara, CA</p>
+    <div class="badges">
+      <span class="badge">June 2023 – Aug 2023</span>
+      <span class="badge">May 2026 – Present</span>
+      <span class="badge badge-yellow">Returning Intern</span>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">01 — Role</span>
+    <h2 class="section-title">Shock & Vibration Testing</h2>
+    <div class="body-text">
+      <p>Quanta Labs is a Santa Clara-based testing and engineering services firm. As a returning intern on the Shock and Vibration team, I conduct environmental stress testing for clients across the automotive and technology industries, interfacing directly with clients to support project deliverables.</p>
+      <p>Responsibilities span <strong>test setup, execution, data collection, and documentation</strong> — including developing and maintaining standard operating procedures to comply with company certifications. Testing involves multi-hour stress tests on professional shock and vibration equipment requiring safety certification to operate.</p>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">02 — Internship Work</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="body-text">
+      <p>Specific project details are subject to NDA. This section will be updated as projects are cleared for public disclosure.</p>
+    </div>
+    <div class="spec-grid" style="margin-top:1.5rem">
+      <div class="spec-card" style="opacity:0.5;border-style:dashed">
+        <div class="spec-title">Project — Coming Soon</div>
+        <ul class="spec-list">
+          <li>Details pending NDA clearance</li>
+        </ul>
+      </div>
+      <div class="spec-card" style="opacity:0.5;border-style:dashed">
+        <div class="spec-title">Project — Coming Soon</div>
+        <ul class="spec-list">
+          <li>Details pending NDA clearance</li>
+        </ul>
+      </div>
+      <div class="spec-card" style="opacity:0.5;border-style:dashed">
+        <div class="spec-title">Project — Coming Soon</div>
+        <ul class="spec-list">
+          <li>Details pending NDA clearance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">03 — Skills Developed</span>
+    <h2 class="section-title">Technical Experience</h2>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-title">Testing</div>
+        <ul class="spec-list">
+          <li>Shock and vibration testing equipment</li>
+          <li>Multi-hour stress test setup and monitoring</li>
+          <li>Structural failure observation and documentation</li>
+        </ul>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Documentation</div>
+        <ul class="spec-list">
+          <li>Standard operating procedures (SOPs)</li>
+          <li>Data collection and report formatting</li>
+          <li>Client-facing deliverable preparation</li>
+        </ul>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Professional</div>
+        <ul class="spec-list">
+          <li>Direct client communication</li>
+          <li>Safety certification for lab equipment</li>
+          <li>Independent project ownership</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <div class="cta-row">
+      <a href="index.html#experience" class="btn-outline">← Experience</a>
+      <a href="index.html#contact" class="btn-primary">Get in Touch ↗</a>
+    </div>
+  </div>
+</div>
+<footer><span class="footer-copy">© 2026 Matthew Hong</span><span class="footer-copy" style="color:var(--accent)">Northeastern University · Class of 2029</span></footer><script>
+const observer = new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');observer.unobserve(x.target)}})},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+</body></html>
