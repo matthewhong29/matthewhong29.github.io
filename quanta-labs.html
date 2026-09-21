@@ -97,6 +97,22 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       <p>My primary intern project: an inventory management and checkout system for the lab's fleet of triaxial accelerometers, replacing a manual sign-out process with a <strong>Flask + SQLite web dashboard</strong>. This first iteration — internally called the "Trial Run" — is a deliberately software-first build tracking a <strong>125+ unit accelerometer inventory</strong>: PIN-based sign-in, direct multi-select checkout/return, and full calibration tracking, all running ahead of the RFID badge and solenoid-locked hardware planned for the full version.</p>
       <p>Other Quanta Labs projects remain under NDA and will be added here as they're cleared for public disclosure.</p>
     </div>
+
+    <img src="images/accel-cabinet-dashboard.jpg" alt="Manager dashboard showing inventory counts, calibration alerts, currently checked-out units, checkout history, and the full accelerometer inventory table" style="width:100%;border-radius:4px;border:1px solid var(--border);display:block;margin-top:1.5rem">
+    <div class="img-caption">Manager dashboard — live inventory counts, calibration alerts, checkout history, and the full unit list</div>
+
+    <div class="img-grid cols-2" style="margin-top:1.25rem">
+      <div>
+        <img src="images/accel-cabinet-select-grid.jpg" alt="Checkout grid with sensitivity color legend, per-unit calibration countdown badges, and multi-select checkout">
+        <div class="img-caption">Checkout grid — sensitivity legend, live cal countdowns, multi-select checkout</div>
+      </div>
+      <div>
+        <img src="images/accel-cabinet-calibration-status.jpg" alt="Calibration status page grouped into expired, due within 7 days, due within 30 days, and current">
+        <div class="img-caption">Calibration status — expired / due-in-7 / due-in-30 / current breakdown</div>
+      </div>
+    </div>
+    <p style="font-family:var(--mono);font-size:0.68rem;color:var(--white-dimmer);letter-spacing:0.04em;margin-top:0.75rem">Screenshots use synthetic demo data — serial numbers, asset IDs, and sensitivity values shown are placeholders, not real lab inventory.</p>
+
     <div class="spec-grid" style="margin-top:1.5rem">
       <div class="spec-card">
         <div class="spec-title">Sign-In & Checkout</div>
