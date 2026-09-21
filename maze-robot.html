@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autonomous Maze-Solving Robot — Matthew Hong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#faf7f1;--navy-2:#f2ece1;--navy-3:#e9e0cf;
+  --accent:#a8562f;--accent-dim:rgba(168,86,47,0.14);--accent-dim2:rgba(168,86,47,0.07);
+  --white:#2b2620;--white-dim:rgba(43,38,32,0.62);--white-dimmer:rgba(43,38,32,0.34);
+  --border:rgba(43,38,32,0.10);--border-accent:rgba(168,86,47,0.35);
+  --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(250,247,241,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:0.85rem;color:var(--accent);letter-spacing:0.12em;text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.page-wrap{max-width:1100px;margin:0 auto;padding:8rem 4rem 5rem}
+.breadcrumb{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;color:var(--white-dimmer)}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.hero-header{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.section-label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;display:block}
+.page-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;color:var(--white);margin-bottom:0.6rem}
+.page-title em{font-style:italic;color:var(--accent)}
+.page-subtitle{font-size:0.9rem;color:var(--white-dimmer);font-family:var(--mono);letter-spacing:0.05em;margin-bottom:1.25rem}
+.badges{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem}
+.badge{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;padding:0.3rem 0.8rem;border-radius:2px;border:1px solid var(--border-accent);color:var(--accent);background:var(--accent-dim2)}
+.badge-green{border-color:rgba(79,107,63,0.35);color:#4f6b3f;background:rgba(79,107,63,0.14)}
+.proj-section{padding:3rem 0;border-bottom:1px solid var(--border)}
+.proj-section:last-of-type{border-bottom:none}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2vw,1.8rem);color:var(--white);margin-bottom:1.25rem;line-height:1.15}
+.body-text{font-size:0.92rem;color:var(--white-dim);line-height:1.85;max-width:720px}
+.body-text p+p{margin-top:1rem}
+.body-text strong{color:var(--white);font-weight:500}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.5rem}
+.spec-card{background:var(--navy-2);border:1px solid var(--border);border-radius:4px;padding:1.25rem;transition:border-color 0.3s}
+.spec-card:hover{border-color:var(--border-accent)}
+.spec-title{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.spec-list{list-style:none;display:flex;flex-direction:column;gap:0.45rem}
+.spec-list li{font-size:0.82rem;color:var(--white-dim);display:flex;align-items:flex-start;gap:0.5rem}
+.spec-list li::before{content:'→';color:var(--accent);font-size:0.72rem;flex-shrink:0;margin-top:0.1rem}
+.future-box{margin-top:2rem;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:4px;padding:1.5rem 2rem}
+.future-box-title{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+.future-box-body{font-size:0.88rem;color:var(--white-dim);line-height:1.75}
+.future-box-body a{color:var(--accent);text-decoration:underline}
+.cta-row{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
+.btn-primary{display:inline-block;background:var(--accent);color:var(--navy);font-family:var(--sans);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.85rem 2rem;text-decoration:none;border-radius:2px;transition:opacity 0.2s,transform 0.2s}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-outline{display:inline-block;border:1px solid var(--border-accent);color:var(--accent);font-family:var(--sans);font-weight:500;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.85rem 2rem;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.2s}
+.btn-outline:hover{background:var(--accent-dim);transform:translateY(-1px)}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;margin-top:4rem}
+.footer-copy{font-family:var(--mono);font-size:0.72rem;color:var(--white-dimmer);letter-spacing:0.08em}
+@media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.page-wrap{padding:7rem 1.5rem 4rem}footer{flex-direction:column;gap:0.5rem;padding:1.5rem}}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">MH / 2029</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<div class="page-wrap">
+  <div class="breadcrumb fade-up"><a href="index.html">Portfolio</a><span>/</span><span>Projects</span><span>/</span><span>Autonomous Maze-Solving Robot</span></div>
+  <div class="hero-header fade-up">
+    <span class="section-label">Team Project · 2025</span>
+    <h1 class="page-title">Autonomous Maze-Solving <em>Robot</em></h1>
+    <p class="page-subtitle">Partner Project with Kyle Tran · Raspberry Pi Pico · MicroPython</p>
+    <div class="badges">
+      <span class="badge">Raspberry Pi Pico</span>
+      <span class="badge">MicroPython</span>
+      <span class="badge">Tank Drive</span>
+      <span class="badge">Autonomous Navigation</span>
+      <span class="badge badge-green">Completed</span>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">01 — Overview</span>
+    <h2 class="section-title">A Two-Person Build</h2>
+    <div class="body-text">
+      <p>Built October–December 2025 with my classmate <strong>Kyle Tran</strong> — a tank-drive robot that autonomously maps and solves a previously unseen maze. The system runs concurrent sensor polling, motor control, and real-time pathfinding on a single Raspberry Pi Pico (MicroPython + asyncio) without blocking the navigation loop, building an internal map of visited cells and backtracking to explore unvisited branches until it finds a way through.</p>
+      <p>The platform uses ultrasonic and IR sensors for wall/obstacle detection, a tank-drive dual-motor configuration, an I2C LCD with status LEDs for live feedback, and a bench potentiometer for tuning behavior without reflashing firmware.</p>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">02 — My Role</span>
+    <h2 class="section-title">Partner, Not Lead Designer</h2>
+    <div class="body-text">
+      <p>Kyle led this project — he designed the full robot in CAD and wrote all of the MicroPython firmware. I partnered with him on the build, and while I was still learning CAD from him at the time, I modeled a handful of smaller components myself under his guidance rather than just watching.</p>
+      <p>I'm including this here because it was a real part of how I learned CAD, not to claim ownership of Kyle's design or code — full credit for the mechanical design and firmware belongs to him.</p>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">03 — Technical Overview</span>
+    <h2 class="section-title">How It Navigates</h2>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-title">Sensing</div>
+        <ul class="spec-list">
+          <li>Ultrasonic sensors for wall/obstacle distance</li>
+          <li>IR sensors for line-following and proximity</li>
+          <li>I2C LCD + status LEDs for live feedback</li>
+        </ul>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Control</div>
+        <ul class="spec-list">
+          <li>Raspberry Pi Pico, MicroPython + asyncio</li>
+          <li>Concurrent sensing, motor control, and pathfinding</li>
+          <li>Bench potentiometer for tuning without reflashing</li>
+        </ul>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Navigation</div>
+        <ul class="spec-list">
+          <li>Tank-drive dual-motor platform</li>
+          <li>Builds an internal map of visited cells</li>
+          <li>Backtracks to explore unvisited branches</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">04 — Credit & Full Writeup</span>
+    <div class="future-box">
+      <div class="future-box-title">Design & Firmware Credit — Kyle Tran</div>
+      <div class="future-box-body">
+        For the full writeup, CAD, and firmware, see <a href="https://ka1e27.github.io/Portfolio/" target="_blank">Kyle's portfolio</a>, the <a href="https://cad.onshape.com/documents/9b8fc3ab8fe23ef6042ec63c/w/d19151a11b2c24d0ce20b822/e/751e13f635af431919cfeaf5" target="_blank">Onshape CAD</a>, and the <a href="https://github.com/ka1e27/Autonomous-Maze-Navigation-Robot" target="_blank">firmware repository</a>.
+      </div>
+    </div>
+    <div class="cta-row">
+      <a href="projects.html" class="btn-outline">← All Projects</a>
+      <a href="index.html#contact" class="btn-primary">Get in Touch ↗</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <span class="footer-copy">© 2026 Matthew Hong</span>
+  <span class="footer-copy" style="color:var(--accent)">Northeastern University · Class of 2029</span>
+</footer>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
