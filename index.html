@@ -10,17 +10,17 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --navy: #0a0f1e;
-    --navy-2: #111827;
-    --navy-3: #1e2a3a;
-    --accent: #e8c547;
-    --accent-dim: rgba(232,197,71,0.12);
-    --accent-dim2: rgba(232,197,71,0.06);
-    --white: #f5f2eb;
-    --white-dim: rgba(245,242,235,0.6);
-    --white-dimmer: rgba(245,242,235,0.25);
-    --border: rgba(245,242,235,0.08);
-    --border-accent: rgba(232,197,71,0.3);
+    --navy: #faf7f1;
+    --navy-2: #f2ece1;
+    --navy-3: #e9e0cf;
+    --accent: #a8562f;
+    --accent-dim: rgba(168,86,47,0.14);
+    --accent-dim2: rgba(168,86,47,0.07);
+    --white: #2b2620;
+    --white-dim: rgba(43,38,32,0.62);
+    --white-dimmer: rgba(43,38,32,0.34);
+    --border: rgba(43,38,32,0.10);
+    --border-accent: rgba(168,86,47,0.35);
     --serif: 'DM Serif Display', serif;
     --sans: 'Outfit', sans-serif;
     --mono: 'DM Mono', monospace;
@@ -42,7 +42,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.25rem 4rem;
-    background: rgba(10,15,30,0.85);
+    background: rgba(250,247,241,0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
@@ -141,7 +141,7 @@
   #hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(232,197,71,0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(168,86,47,0.05) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-grid-bg {
@@ -296,7 +296,7 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 40%;
-    background: linear-gradient(transparent, rgba(232,197,71,0.05));
+    background: linear-gradient(transparent, rgba(168,86,47,0.06));
   }
   .photo-icon {
     width: 48px; height: 48px;
@@ -422,8 +422,8 @@
     padding: 0.2rem 0.6rem;
     border-radius: 2px;
   }
-  .status-complete { background: rgba(20,80,50,0.4); color: #5ee89a; border: 1px solid rgba(94,232,154,0.2); }
-  .status-ongoing { background: rgba(232,197,71,0.1); color: var(--accent); border: 1px solid var(--border-accent); }
+  .status-complete { background: rgba(79,107,63,0.16); color: #4f6b3f; border: 1px solid rgba(79,107,63,0.32); }
+  .status-ongoing { background: rgba(168,86,47,0.12); color: var(--accent); border: 1px solid var(--border-accent); }
   .project-title {
     font-family: var(--serif);
     font-size: 1.6rem;
@@ -595,6 +595,7 @@
     .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
 </style>
 </head>
 <body>
@@ -629,8 +630,8 @@
     <div class="hero-tag">Mechanical Engineering · Class of 2029</div>
     <h1 class="hero-name">Matthew<br><em>Hong</em></h1>
     <p class="hero-subtitle">
-      First-year Mechanical Engineering student at Northeastern University
-      with concentrations in Aerospace and a Business minor. Building autonomous systems,
+      Second-year Mechanical Engineering student at Northeastern University
+      with minors in Electrical Engineering and Business. Building autonomous systems,
       pushing physical limits, and designing for the real world.
     </p>
     <div class="hero-cta">
@@ -671,8 +672,9 @@
       <h2 class="section-title" style="margin-bottom:1.5rem;">Engineering with<br><em style="font-family:var(--serif); font-style:italic; color:var(--accent);">purpose.</em></h2>
       <div class="about-body">
         <p>
-          I'm a first-year Mechanical Engineering student at <strong>Northeastern University</strong>,
-          studying in the London Scholar Program with concentrations in Aerospace and a Business minor.
+          I'm a second-year Mechanical Engineering student at <strong>Northeastern University</strong>,
+          now based on campus in <strong>Boston</strong> after completing my first year abroad in the
+          <strong>London Scholar Program</strong>. I'm minoring in Electrical Engineering and Business.
           My work sits at the intersection of mechanical design, embedded systems, and autonomous platforms.
         </p>
         <p>
@@ -688,10 +690,11 @@
       </div>
       <div class="tags">
         <span class="tag">Northeastern University</span>
-        <span class="tag">London Scholar Program</span>
-        <span class="tag">Aerospace Concentration</span>
+        <span class="tag">Boston, MA</span>
+        <span class="tag">London Scholar Program Alum</span>
+        <span class="tag">Electrical Engineering Minor</span>
         <span class="tag">Business Minor</span>
-        <span class="tag">Bay Area, CA</span>
+        <span class="tag">Bay Area, CA (Hometown)</span>
       </div>
       <div class="about-links">
         <a class="about-link" href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank">LinkedIn ↗</a>
@@ -730,7 +733,9 @@
               unmanned surface vehicle (USV) developed to collect environmental data in degraded aquatic
               ecosystems. Built as a two-person first-year project within a single semester on a £100 budget.
               Features a custom waterproof sensor pod, 1km verified wireless range, three dedicated Raspberry Pi Pico microcontrollers (vessel, sensor pod, and shore station), comprehensive fault-tolerant
-              safety systems, and structured data output formatted for Excel import.
+              safety systems, and structured data output formatted for Excel import. Components were modeled
+              in SolidWorks with bilateral tolerances for 3D printing, including a Van Veen grab sediment
+              sampler delivered with a complete engineering drawing package and BOM.
             </p>
           </div>
           <div class="project-tags">
@@ -912,16 +917,17 @@
   <div class="exp-list">
 
     <div class="exp-item fade-up">
-      <div class="exp-date">June 2023 – Aug 2023<br>May 2026 – Present</div>
+      <div class="exp-date">June 2023 – Aug 2023<br>May 2026 – Aug 2026</div>
       <div class="exp-content">
         <div class="exp-title">Intern — Shock and Vibration Team</div>
         <div class="exp-company">Quanta Labs · Santa Clara, CA</div>
         <p class="exp-desc">
-          Conducting shock and vibration testing and interfacing directly with clients to support project deliverables.
-          Developed and maintained documentation guidelines and standard operating procedures.
-          Monitored and set up multi-hour stress tests. Currently developing a solution to an internal operational
-          problem, taking ownership from identification through implementation, with expanded technical scope
-          and client-facing responsibilities.
+          Conducted over 75 shock and vibration tests and interfaced directly with aerospace, defense, and
+          industrial clients to support project deliverables. Authored and organized standard operating
+          procedures supporting compliance with company quality-system requirements, and set up and monitored
+          multi-hour stress tests. Customized and fabricated a three-dimensional test environment to meet
+          customers' high-precision test requirements, and designed a Flask/SQLite web application that replaced
+          manual accelerometer tracking with PIN-based checkout, calibration-due alerts, and full audit history.
         </p>
         <div style="margin-top:1rem">
           <a href="quanta-labs.html" style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--border-accent);padding-bottom:1px;">View Experience Page →</a>
@@ -942,6 +948,18 @@
       </div>
     </div>
 
+    <div class="exp-item fade-up" style="transition-delay:0.2s">
+      <div class="exp-date">June 2024 – Aug 2024</div>
+      <div class="exp-content">
+        <div class="exp-title">Student Teacher</div>
+        <div class="exp-company">ICode · Palo Alto, CA</div>
+        <p class="exp-desc">
+          Designed and taught weekly VEX Robotics lessons for groups of 20 students aged 10–14, and provided
+          one-on-one instruction to reinforce engineering and problem-solving concepts.
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -954,7 +972,9 @@
       <div class="skill-group-title">Engineering & Design</div>
       <ul class="skill-list">
         <li>SolidWorks (CAD)</li>
+        <li>AutoCAD</li>
         <li>3D Printing & Prototyping</li>
+        <li>Machining & Fabrication (lathe, laser cutter)</li>
         <li>Structural Analysis</li>
         <li>Mechanical Design</li>
         <li>Tolerance & GD&T</li>
@@ -973,8 +993,10 @@
     <div class="skill-group fade-up" style="transition-delay:0.1s">
       <div class="skill-group-title">Software</div>
       <ul class="skill-list">
-        <li>MicroPython</li>
         <li>Python</li>
+        <li>MicroPython</li>
+        <li>Java</li>
+        <li>Flask & SQLite</li>
         <li>Autonomous Navigation</li>
         <li>Data Logging & Acquisition</li>
         <li>Microsoft Excel</li>

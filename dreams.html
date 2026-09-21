@@ -9,15 +9,15 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --navy:#0a0f1e;--navy-2:#111827;--navy-3:#1e2a3a;
-  --accent:#e8c547;--accent-dim:rgba(232,197,71,0.12);--accent-dim2:rgba(232,197,71,0.06);
-  --white:#f5f2eb;--white-dim:rgba(245,242,235,0.6);--white-dimmer:rgba(245,242,235,0.25);
-  --border:rgba(245,242,235,0.08);--border-accent:rgba(232,197,71,0.3);
+  --navy:#faf7f1;--navy-2:#f2ece1;--navy-3:#e9e0cf;
+  --accent:#a8562f;--accent-dim:rgba(168,86,47,0.14);--accent-dim2:rgba(168,86,47,0.07);
+  --white:#2b2620;--white-dim:rgba(43,38,32,0.62);--white-dimmer:rgba(43,38,32,0.34);
+  --border:rgba(43,38,32,0.10);--border-accent:rgba(168,86,47,0.35);
   --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;
 }
 html{scroll-behavior:smooth}
 body{background:var(--navy);color:var(--white);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(10,15,30,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(250,247,241,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:var(--mono);font-size:0.85rem;color:var(--accent);letter-spacing:0.12em;text-decoration:none}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
 .nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);text-decoration:none;transition:color 0.2s}
@@ -36,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .proj-tagline{font-size:1rem;color:var(--white-dim);margin-bottom:2rem;font-weight:300;max-width:600px}
 .proj-badges{display:flex;flex-wrap:wrap;gap:0.6rem}
 .badge{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;padding:0.3rem 0.8rem;border-radius:2px;border:1px solid var(--border-accent);color:var(--accent);background:var(--accent-dim2)}
-.badge-green{border-color:rgba(94,232,154,0.3);color:#5ee89a;background:rgba(20,80,50,0.3)}
+.badge-green{border-color:rgba(79,107,63,0.35);color:#4f6b3f;background:rgba(79,107,63,0.14)}
 
 /* LAYOUT */
 .page-wrap{max-width:1100px;margin:0 auto;padding:0 4rem}
@@ -89,7 +89,7 @@ section.proj-section:last-child{border-bottom:none}
 .gallery-item.tall{grid-row:span 2}
 .gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.4s ease;display:block}
 .gallery-item:hover img{transform:scale(1.04)}
-.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(10,15,30,0.9));font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--white-dim);opacity:0;transition:opacity 0.3s}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(43,38,32,0.88));font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--white-dim);opacity:0;transition:opacity 0.3s}
 .gallery-item:hover .gallery-caption{opacity:1}
 
 /* OUTCOME */
@@ -129,6 +129,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
   .gallery-item.wide{grid-column:span 1}
   footer{flex-direction:column;gap:0.5rem;padding:1.5rem}
 }
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
 </style>
 </head>
 <body>
@@ -379,7 +380,11 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
     </div>
     <div class="future-box">
       <div class="future-box-title">Future Development</div>
-      <div class="future-box-body">The team is in discussions with the <strong>Port of Oakland</strong> to deploy DREAMS for large-scale water quality monitoring and environmental surveillance. This would expand the platform from a student prototype to a real-world environmental monitoring tool used by port operations staff.</div>
+      <div class="future-box-body">
+        The team is in discussions with a regional port authority to deploy DREAMS for large-scale water quality monitoring and environmental surveillance — expanding the platform from a student prototype to a real-world environmental monitoring tool used by port operations staff.
+        <br><br>
+        The team has also heard back from a marine science research institute about a potential future collaboration, and is exploring how DREAMS could support their environmental data collection work.
+      </div>
     </div>
     <div class="cta-row">
       <a href="projects.html" class="btn-outline">← All Projects</a>

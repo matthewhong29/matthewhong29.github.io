@@ -5,9 +5,9 @@
 <title>Quanta Labs — Matthew Hong</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#0a0f1e;--navy-2:#111827;--navy-3:#1e2a3a;--accent:#e8c547;--accent-dim:rgba(232,197,71,0.12);--accent-dim2:rgba(232,197,71,0.06);--white:#f5f2eb;--white-dim:rgba(245,242,235,0.6);--white-dimmer:rgba(245,242,235,0.25);--border:rgba(245,242,235,0.08);--border-accent:rgba(232,197,71,0.3);--serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;}
+:root{--navy:#faf7f1;--navy-2:#f2ece1;--navy-3:#e9e0cf;--accent:#a8562f;--accent-dim:rgba(168,86,47,0.14);--accent-dim2:rgba(168,86,47,0.07);--white:#2b2620;--white-dim:rgba(43,38,32,0.62);--white-dimmer:rgba(43,38,32,0.34);--border:rgba(43,38,32,0.10);--border-accent:rgba(168,86,47,0.35);--serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;}
 html{scroll-behavior:smooth}body{background:var(--navy);color:var(--white);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(10,15,30,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(250,247,241,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:var(--mono);font-size:0.85rem;color:var(--accent);letter-spacing:0.12em;text-decoration:none}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
 .nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);text-decoration:none;transition:color 0.2s}
@@ -22,7 +22,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .page-subtitle{font-size:0.9rem;color:var(--white-dimmer);font-family:var(--mono);letter-spacing:0.05em;margin-bottom:1.25rem}
 .badges{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem}
 .badge{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;padding:0.3rem 0.8rem;border-radius:2px;border:1px solid var(--border-accent);color:var(--accent);background:var(--accent-dim2)}
-.badge-yellow{border-color:rgba(232,197,71,0.4);color:var(--accent);background:var(--accent-dim)}
+.badge-yellow{border-color:rgba(168,86,47,0.4);color:var(--accent);background:var(--accent-dim)}
 .proj-section{padding:3rem 0;border-bottom:1px solid var(--border)}
 .proj-section:last-of-type{border-bottom:none}
 .section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2vw,1.8rem);color:var(--white);margin-bottom:1.25rem;line-height:1.15}
@@ -53,6 +53,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;margin-top:4rem}
 .footer-copy{font-family:var(--mono);font-size:0.72rem;color:var(--white-dimmer);letter-spacing:0.08em}
 @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.page-wrap{padding:7rem 1.5rem 4rem}.img-grid.cols-2{grid-template-columns:1fr}footer{flex-direction:column;gap:0.5rem;padding:1.5rem}}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
 </style>
 </head>
 <body>
@@ -75,7 +76,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
     <p class="page-subtitle">Intern — Shock and Vibration Team · Santa Clara, CA</p>
     <div class="badges">
       <span class="badge">June 2023 – Aug 2023</span>
-      <span class="badge">May 2026 – Present</span>
+      <span class="badge">May 2026 – Aug 2026</span>
       <span class="badge badge-yellow">Returning Intern</span>
     </div>
   </div>
@@ -84,8 +85,8 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
     <span class="section-label">01 — Role</span>
     <h2 class="section-title">Shock & Vibration Testing</h2>
     <div class="body-text">
-      <p>Quanta Labs is a Santa Clara-based testing and engineering services firm. As a returning intern on the Shock and Vibration team, I conduct environmental stress testing for clients across the automotive and technology industries, interfacing directly with clients to support project deliverables.</p>
-      <p>Responsibilities span <strong>test setup, execution, data collection, and documentation</strong> — including developing and maintaining standard operating procedures to comply with company certifications. Testing involves multi-hour stress tests on professional shock and vibration equipment requiring safety certification to operate.</p>
+      <p>Quanta Labs is a Santa Clara-based testing and engineering services firm. As a returning intern on the Shock and Vibration team, I conducted <strong>over 75 shock and vibration tests</strong> and interfaced directly with aerospace, defense, and industrial clients to support project deliverables.</p>
+      <p>Responsibilities span <strong>test setup, execution, data collection, and documentation</strong> — including authoring and organizing standard operating procedures supporting compliance with company quality-system requirements. Testing involves multi-hour stress tests on professional shock and vibration equipment requiring safety certification to operate. I also customized and fabricated a three-dimensional test environment to meet customers' high-precision test requirements.</p>
     </div>
   </div>
 
