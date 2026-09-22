@@ -26,7 +26,7 @@
 :root{
   --navy:#faf7f1;--navy-2:#f2ece1;--navy-3:#e9e0cf;
   --accent:#a8562f;--accent-dim:rgba(168,86,47,0.14);--accent-dim2:rgba(168,86,47,0.07);
-  --white:#2b2620;--white-dim:rgba(43,38,32,0.62);--white-dimmer:rgba(43,38,32,0.34);
+  --white:#2b2620;--white-dim:rgba(43,38,32,0.62);--white-dimmer:rgba(43,38,32,0.56);
   --border:rgba(43,38,32,0.10);--border-accent:rgba(168,86,47,0.35);
   --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;
 }
@@ -40,8 +40,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HERO */
 .proj-hero{min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 4rem 4rem;position:relative;overflow:hidden}
-.proj-hero-img{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.35)}
-.proj-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--navy) 0%,transparent 60%)}
+.proj-hero-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.proj-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,var(--navy) 0%,rgba(250,247,241,0.9) 35%,rgba(250,247,241,0.55) 70%,rgba(250,247,241,0.2) 100%),linear-gradient(to right,rgba(250,247,241,0.85) 0%,rgba(250,247,241,0) 65%)}
 .proj-hero-content{position:relative;z-index:2;max-width:800px}
 .breadcrumb{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;color:var(--white-dimmer)}
 .breadcrumb a{color:var(--accent);text-decoration:none}
@@ -323,7 +323,7 @@ body.nav-open nav{background:var(--navy)}
   <section class="proj-section fade-up">
     <span class="section-label">03 — Safety Architecture</span>
     <h2 class="section-title">Fault-Tolerant Systems</h2>
-    <p style="font-size:0.9rem;color:var(--white-dim);max-width:650px;margin-bottom:0.5rem;">The safety architecture implements per-sensor watchdog monitoring with quality flags on every telemetry frame, fault thresholds with safe-stop on critical failures, and SAFETY_OFF overrides requiring explicit confirmation for battery and hull sensors — engineering typically seen in professional maritime platforms, not first-year student projects.</p>
+    <p style="font-size:0.9rem;color:var(--white-dim);max-width:650px;margin-bottom:0.5rem;">The safety architecture implements per-sensor watchdog monitoring with quality flags on every telemetry frame, fault thresholds with safe-stop on critical failures, and SAFETY_OFF overrides requiring explicit confirmation for battery and hull sensors — modeled on the fail-safe patterns used on professional maritime platforms.</p>
     <div class="safety-grid">
       <div class="safety-item">
         <span class="safety-icon">💧</span>
@@ -388,13 +388,9 @@ body.nav-open nav{background:var(--navy)}
         <img src="images/dreams-wired-makerspace.jpg" alt="Holding the wired boat in makerspace" loading="lazy">
         <div class="gallery-caption">Fully wired — makerspace build session</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item wide">
         <img src="images/dreams-field-debugging.jpg" alt="Field debugging session" loading="lazy">
         <div class="gallery-caption">Field debugging session pre-test</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/dreams-hull-painting.jpg" alt="Hull painting and finishing" loading="lazy">
-        <div class="gallery-caption">Hull painting & waterproofing</div>
       </div>
       <div class="gallery-item">
         <img src="images/dreams-final-presentation.jpg" alt="Team with boat at final presentation" loading="lazy">

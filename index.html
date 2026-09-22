@@ -19,6 +19,23 @@
 <meta name="twitter:title" content="Matthew Hong — Mechanical Engineering | Northeastern '29">
 <meta name="twitter:description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
 <meta name="twitter:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Matthew Hong",
+  "url": "https://matthewhong29.github.io/",
+  "image": "https://matthewhong29.github.io/images/matthew-headshot.jpg",
+  "jobTitle": "Mechanical Engineering Student",
+  "email": "mailto:hong.matt@northeastern.edu",
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Northeastern University" },
+  "knowsAbout": ["Mechanical Design", "SolidWorks", "Shock and Vibration Testing", "Embedded Systems", "Autonomous Systems", "Python"],
+  "sameAs": [
+    "https://www.linkedin.com/in/matthew-hong-b64a79312",
+    "https://github.com/matthewhong29"
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -33,7 +50,7 @@
     --accent-dim2: rgba(168,86,47,0.07);
     --white: #2b2620;
     --white-dim: rgba(43,38,32,0.62);
-    --white-dimmer: rgba(43,38,32,0.34);
+    --white-dimmer: rgba(43,38,32,0.56);
     --border: rgba(43,38,32,0.10);
     --border-accent: rgba(168,86,47,0.35);
     --serif: 'DM Serif Display', serif;
@@ -762,7 +779,7 @@ body.nav-open nav{background:var(--navy)}
     <h1 class="hero-name">Matthew<br><em>Hong</em></h1>
     <p class="hero-subtitle">
       I build <strong>autonomous systems and test hardware</strong> — from an unmanned survey
-      vessel field-tested on the Thames to shock-and-vibration testing for aerospace and
+      vessel field-tested at St Katharine Docks, London, to shock-and-vibration testing for aerospace and
       defense clients. Mechanical design, embedded systems, and the software that ties them together.
     </p>
     <div class="hero-cta">
@@ -785,9 +802,9 @@ body.nav-open nav{background:var(--navy)}
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <span class="stat-num">6</span>
-      <div class="stat-label">Documented Builds</div>
-      <div class="stat-sub">CAD, firmware, fabrication &amp; field testing</div>
+      <span class="stat-num">125+</span>
+      <div class="stat-label">Accelerometers Tracked</div>
+      <div class="stat-sub">by the Flask/SQLite inventory app I built solo at Quanta Labs</div>
     </div>
   </div>
 </section>
@@ -889,85 +906,8 @@ body.nav-open nav{background:var(--navy)}
       </div>
     </div>
 
-    <!-- Golf Net -->
-    <div class="project-card fade-up" style="transition-delay:0.1s">
-      <div class="project-card-inner">
-        <div class="project-img">
-          <div class="project-img-placeholder" style="background:none;">
-            <img loading="lazy" decoding="async" src="images/golf-net-full-assembly-cad-model.jpg" alt="Golf Practice Net" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-          </div>
-          <div class="project-img-tag">DIY · FABRICATION</div>
-        </div>
-        <div class="project-content">
-          <div>
-            <div class="project-meta">
-              <span class="project-year">2026</span>
-              <span class="project-status status-ongoing">In Progress</span>
-            </div>
-            <h3 class="project-title">Golf Practice Net</h3>
-            <div class="project-role">Designer & Builder · Solo Project</div>
-            <p class="project-desc">
-              A 10×7×3 ft freestanding golf practice net designed from the ground up. Features a custom PVC
-              frame with 3D-printed ASA structural joints designed for UV and weather resistance, and
-              commercial-grade #21 knotted nylon netting. Every joint and connection point was designed
-              in CAD before fabrication to ensure structural integrity under repeated impact loading.
-            </p>
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">CAD Design</span>
-            <span class="project-tag">3D Printing (ASA)</span>
-            <span class="project-tag">Structural Design</span>
-            <span class="project-tag">PVC Fabrication</span>
-            <span class="project-tag">Load Analysis</span>
-          </div>
-          <div style="margin-top:1.5rem">
-            <a href="golf-net.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Magnetic Rod Vest Clip -->
-    <div class="project-card fade-up" style="transition-delay:0.2s">
-      <div class="project-card-inner">
-        <div class="project-img">
-          <div class="project-img-placeholder" style="background:none;">
-            <img loading="lazy" decoding="async" src="images/fishing-clip-vest-side-cad-render.jpg" alt="Magnetic Fishing Rod Vest Clip" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-          </div>
-          <div class="project-img-tag">CAD · HARDWARE</div>
-        </div>
-        <div class="project-content">
-          <div>
-            <div class="project-meta">
-              <span class="project-year">2026</span>
-              <span class="project-status status-ongoing">In Progress</span>
-            </div>
-            <h3 class="project-title">Magnetic Fishing Rod Vest Clip</h3>
-            <div class="project-role">Designer & Builder · Solo Project</div>
-            <p class="project-desc">
-              A DIY magnetic quick-release system for attaching a fishing rod to a vest — eliminating the
-              need to set the rod down between casts. The vest-side housing features a D-ring loop and ribbed
-              internal gusset structure for load transfer. The rod-side clamp uses four curved spring fingers
-              that flex to snap around the rod blank and retain it under load. Both housings share a dual N52
-              neodymium magnet base spaced to resist rotation and provide predictable release. Epoxy-coated
-              magnets selected for corrosion resistance in outdoor environments.
-            </p>
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">CAD Design</span>
-            <span class="project-tag">3D Printing (ASA)</span>
-            <span class="project-tag">Magnet Engineering</span>
-            <span class="project-tag">Hardware Design</span>
-          </div>
-          <div style="margin-top:1.5rem">
-            <a href="fishing-rod-clip.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Smart Accelerometer Cabinet -->
-    <div class="project-card fade-up" style="transition-delay:0.3s">
+    <div class="project-card fade-up" style="transition-delay:0.05s">
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder" style="background:none;">
@@ -1005,8 +945,120 @@ body.nav-open nav{background:var(--navy)}
       </div>
     </div>
 
+    <!-- Golf Net -->
+    <div class="project-card fade-up" style="transition-delay:0.10s">
+      <div class="project-card-inner">
+        <div class="project-img">
+          <div class="project-img-placeholder" style="background:none;">
+            <img loading="lazy" decoding="async" src="images/golf-net-full-assembly-cad-model.jpg" alt="Golf Practice Net" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="project-img-tag">DIY · FABRICATION</div>
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-meta">
+              <span class="project-year">2026</span>
+              <span class="project-status status-ongoing">In Progress</span>
+            </div>
+            <h3 class="project-title">Golf Practice Net</h3>
+            <div class="project-role">Designer & Builder · Solo Project</div>
+            <p class="project-desc">
+              A 10 × 7.5 × 3 ft freestanding golf practice net designed from the ground up. Features a custom PVC
+              frame with 3D-printed ASA structural joints designed for UV and weather resistance, and
+              repurposed HDPE construction netting — about $50 all-in. Every joint and connection point was
+              designed in CAD before fabrication to ensure structural integrity under repeated impact loading.
+            </p>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">CAD Design</span>
+            <span class="project-tag">3D Printing (ASA)</span>
+            <span class="project-tag">Structural Design</span>
+            <span class="project-tag">PVC Fabrication</span>
+            <span class="project-tag">Load Analysis</span>
+          </div>
+          <div style="margin-top:1.5rem">
+            <a href="golf-net.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Magnetic Rod Vest Clip -->
+    <div class="project-card fade-up" style="transition-delay:0.15s">
+      <div class="project-card-inner">
+        <div class="project-img">
+          <div class="project-img-placeholder" style="background:none;">
+            <img loading="lazy" decoding="async" src="images/fishing-clip-vest-side-cad-render.jpg" alt="Magnetic Fishing Rod Vest Clip" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="project-img-tag">CAD · HARDWARE</div>
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-meta">
+              <span class="project-year">2026</span>
+              <span class="project-status status-ongoing">In Progress</span>
+            </div>
+            <h3 class="project-title">Magnetic Fishing Rod Vest Clip</h3>
+            <div class="project-role">Designer & Builder · Solo Project</div>
+            <p class="project-desc">
+              A DIY magnetic quick-release system for attaching a fishing rod to a vest — eliminating the
+              need to set the rod down between casts. The vest-side housing features a D-ring loop and ribbed
+              internal gusset structure for load transfer. The rod-side clamp uses four curved spring fingers
+              that flex to snap around the rod blank and retain it under load. Both housings share a dual N52
+              neodymium magnet base spaced to resist rotation and provide predictable release. Epoxy-coated
+              magnets selected for corrosion resistance in outdoor environments.
+            </p>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">CAD Design</span>
+            <span class="project-tag">3D Printing (ASA)</span>
+            <span class="project-tag">Magnet Engineering</span>
+            <span class="project-tag">Hardware Design</span>
+          </div>
+          <div style="margin-top:1.5rem">
+            <a href="fishing-rod-clip.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worm Compost Bin Cover -->
+    <div class="project-card fade-up" style="transition-delay:0.20s">
+      <div class="project-card-inner">
+        <div class="project-img">
+          <div class="project-img-placeholder" style="background:none;">
+            <img loading="lazy" decoding="async" src="images/compost-cover-cad-model.jpg" alt="Worm Compost Bin Cover" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          </div>
+          <div class="project-img-tag">CAD · 3D PRINTING</div>
+        </div>
+        <div class="project-content">
+          <div>
+            <div class="project-meta">
+              <span class="project-year">2026</span>
+              <span class="project-status status-complete">Completed</span>
+            </div>
+            <h3 class="project-title">Worm Compost Bin Cover</h3>
+            <div class="project-role">Designer & Builder · Solo Project</div>
+            <p class="project-desc">
+              A reverse-engineered replacement tray for a worm composting system that only shipped with one cover.
+              Modeled in SolidWorks to match the original's perforation pattern, grip divots, and vent slots exactly,
+              then 3D-printed in ASA for outdoor durability. Now in active use as an additional tray.
+            </p>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">CAD Design</span>
+            <span class="project-tag">3D Printing (ASA)</span>
+            <span class="project-tag">Reverse Engineering</span>
+          </div>
+          <div style="margin-top:1.5rem">
+            <a href="compost-cover.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Autonomous Maze-Solving Robot -->
-    <div class="project-card fade-up" style="transition-delay:0.35s">
+    <div class="project-card fade-up" style="transition-delay:0.25s">
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder blueprint">
@@ -1042,41 +1094,6 @@ body.nav-open nav{background:var(--navy)}
           </div>
           <div style="margin-top:1.5rem">
             <a href="maze-robot.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Worm Compost Bin Cover -->
-    <div class="project-card fade-up" style="transition-delay:0.4s">
-      <div class="project-card-inner">
-        <div class="project-img">
-          <div class="project-img-placeholder" style="background:none;">
-            <img loading="lazy" decoding="async" src="images/compost-cover-cad-model.jpg" alt="Worm Compost Bin Cover" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-          </div>
-          <div class="project-img-tag">CAD · 3D PRINTING</div>
-        </div>
-        <div class="project-content">
-          <div>
-            <div class="project-meta">
-              <span class="project-year">2026</span>
-              <span class="project-status status-complete">Completed</span>
-            </div>
-            <h3 class="project-title">Worm Compost Bin Cover</h3>
-            <div class="project-role">Designer & Builder · Solo Project</div>
-            <p class="project-desc">
-              A reverse-engineered replacement tray for a worm composting system that only shipped with one cover.
-              Modeled in SolidWorks to match the original's perforation pattern, grip divots, and vent slots exactly,
-              then 3D-printed in ASA for outdoor durability. Now in active use as an additional tray.
-            </p>
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">CAD Design</span>
-            <span class="project-tag">3D Printing (ASA)</span>
-            <span class="project-tag">Reverse Engineering</span>
-          </div>
-          <div style="margin-top:1.5rem">
-            <a href="compost-cover.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
           </div>
         </div>
       </div>
@@ -1267,6 +1284,16 @@ body.nav-open nav{background:var(--navy)}
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Whole project card opens its detail page (cards already use cursor:pointer)
+  document.querySelectorAll('.project-card').forEach(card => {
+    const link = card.querySelector('a.btn-primary');
+    if (!link) return;
+    card.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      window.location.href = link.href;
+    });
+  });
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
