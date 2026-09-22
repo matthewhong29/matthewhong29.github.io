@@ -3,6 +3,21 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autonomous Maze-Solving Robot — Matthew Hong</title>
+<meta name="description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
+<meta name="author" content="Matthew Hong">
+<meta name="theme-color" content="#faf7f1">
+<link rel="canonical" href="https://matthewhong29.github.io/maze-robot.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matthew Hong — Engineering Portfolio">
+<meta property="og:title" content="Autonomous Maze-Solving Robot — Matthew Hong">
+<meta property="og:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
+<meta property="og:url" content="https://matthewhong29.github.io/maze-robot.html">
+<meta property="og:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Autonomous Maze-Solving Robot — Matthew Hong">
+<meta name="twitter:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -59,12 +74,34 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
 .footer-copy{font-family:var(--mono);font-size:0.72rem;color:var(--white-dimmer);letter-spacing:0.08em}
 @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.page-wrap{padding:7rem 1.5rem 4rem}footer{flex-direction:column;gap:0.5rem;padding:1.5rem}}
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
+/* ── responsive nav + focus states (added) ── */
+.nav-toggle{display:none;background:none;border:1px solid var(--border-accent);border-radius:3px;padding:0.4rem 0.55rem;cursor:pointer;line-height:0}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--accent);border-radius:2px;transition:transform .25s,opacity .2s}
+.nav-toggle span+span{margin-top:4px}
+body.nav-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+body.nav-open .nav-toggle span:nth-child(2){opacity:0}
+body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:900px){
+  nav{flex-wrap:wrap;padding:0.9rem 1.25rem}
+  .nav-logo{white-space:nowrap}
+  .nav-toggle{display:block}
+  .nav-links{display:none;width:100%;flex-direction:column;gap:0;margin-top:0.9rem;border-top:1px solid var(--border);padding-top:0.5rem}
+  body.nav-open .nav-links{display:flex}
+  .nav-links>li>a{display:block;padding:0.7rem 0;font-size:0.9rem}
+  .page-wrap{padding-left:1.25rem !important;padding-right:1.25rem !important}
+}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.fade-up{transition:none !important}}
+
+body.nav-open nav{background:var(--navy)}
 </style>
+<noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="index.html">MH / 2029</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#projects">Projects</a></li>
     <li><a href="index.html#experience">Experience</a></li>
@@ -78,7 +115,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
   <div class="hero-header fade-up">
     <span class="section-label">Team Project · 2025</span>
     <h1 class="page-title">Autonomous Maze-Solving <em>Robot</em></h1>
-    <p class="page-subtitle">Partner Project with <a href="https://ka1e27.github.io/Portfolio/" target="_blank" style="color:var(--accent);text-decoration:underline;">Kyle Tran ↗</a> · Raspberry Pi Pico · MicroPython</p>
+    <p class="page-subtitle">Partner Project with <a href="https://ka1e27.github.io/Portfolio/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">Kyle Tran ↗</a> · Raspberry Pi Pico · MicroPython</p>
     <div class="badges">
       <span class="badge">Raspberry Pi Pico</span>
       <span class="badge">MicroPython</span>
@@ -142,11 +179,11 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
     <div class="future-box">
       <div class="future-box-title">Design & Firmware Credit — Kyle Tran</div>
       <div class="future-box-body">
-        For the full writeup, CAD, and firmware, see <a href="https://ka1e27.github.io/Portfolio/" target="_blank">Kyle's portfolio</a>, the <a href="https://cad.onshape.com/documents/9b8fc3ab8fe23ef6042ec63c/w/d19151a11b2c24d0ce20b822/e/751e13f635af431919cfeaf5" target="_blank">Onshape CAD</a>, and the <a href="https://github.com/ka1e27/Autonomous-Maze-Navigation-Robot" target="_blank">firmware repository</a>.
+        For the full writeup, CAD, and firmware, see <a href="https://ka1e27.github.io/Portfolio/" target="_blank" rel="noopener">Kyle's portfolio</a>, the <a href="https://cad.onshape.com/documents/9b8fc3ab8fe23ef6042ec63c/w/d19151a11b2c24d0ce20b822/e/751e13f635af431919cfeaf5" target="_blank" rel="noopener">Onshape CAD</a>, and the <a href="https://github.com/ka1e27/Autonomous-Maze-Navigation-Robot" target="_blank" rel="noopener">firmware repository</a>.
       </div>
     </div>
     <div class="cta-row">
-      <a href="https://ka1e27.github.io/Portfolio/" target="_blank" class="btn-primary">View Kyle's Portfolio ↗</a>
+      <a href="https://ka1e27.github.io/Portfolio/" target="_blank" rel="noopener" class="btn-primary">View Kyle's Portfolio ↗</a>
       <a href="projects.html" class="btn-outline">← All Projects</a>
       <a href="index.html#contact" class="btn-outline">Get in Touch ↗</a>
     </div>
@@ -161,6 +198,25 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
 },{threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){
+  var t=document.getElementById('navToggle');
+  if(!t) return;
+  t.addEventListener('click',function(){
+    var open=document.body.classList.toggle('nav-open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.setAttribute('aria-label',open?'Close menu':'Open menu');
+  });
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click',function(){
+      if(!a.classList.contains('nav-dropdown-trigger')){
+        document.body.classList.remove('nav-open');
+        t.setAttribute('aria-expanded','false');
+      }
+    });
+  });
+})();
 </script>
 </body>
 </html>

@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Matthew Hong — Engineering Portfolio</title>
+<meta name="description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
+<meta name="author" content="Matthew Hong">
+<meta name="theme-color" content="#faf7f1">
+<link rel="canonical" href="https://matthewhong29.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matthew Hong — Engineering Portfolio">
+<meta property="og:title" content="Matthew Hong — Mechanical Engineering | Northeastern '29">
+<meta property="og:description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
+<meta property="og:url" content="https://matthewhong29.github.io/">
+<meta property="og:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Matthew Hong — Mechanical Engineering | Northeastern '29">
+<meta name="twitter:description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -234,10 +249,18 @@
   }
   .stat-label {
     font-size: 0.8rem;
-    color: var(--white-dimmer);
+    color: var(--white);
+    font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
+  }
+  .stat-sub {
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    line-height: 1.5;
+    margin-top: 0.2rem;
+    max-width: 30ch;
   }
   .stat-divider {
     width: 40px; height: 1px;
@@ -388,6 +411,30 @@
     font-size: 2.5rem;
     color: var(--accent);
     opacity: 0.6;
+  }
+  /* technical-drawing panel used where no photo exists yet */
+  .blueprint {
+    background:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px),
+      var(--navy-3);
+    background-size: 22px 22px, 22px 22px, auto;
+    gap: 0.35rem;
+  }
+  .bp-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--accent);
+    letter-spacing: 0;
+    text-transform: none;
+    margin-bottom: 0.3rem;
+  }
+  .bp-spec {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--white-dim);
+    text-transform: uppercase;
   }
   .project-img-tag {
     position: absolute;
@@ -570,6 +617,61 @@
     letter-spacing: 0.08em;
   }
 
+  /* ── AVAILABILITY BADGE ── */
+  .hero-availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #3f5c31;
+    background: rgba(79,107,63,0.13);
+    border: 1px solid rgba(79,107,63,0.34);
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    max-width: 100%;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #4f6b3f;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(79,107,63,0.6);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(79,107,63,0.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(79,107,63,0); }
+    100% { box-shadow: 0 0 0 0 rgba(79,107,63,0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-dot { animation: none; }
+    .fade-up { transition: none !important; }
+  }
+
+  /* ── MOBILE NAV TOGGLE ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border-accent);
+    border-radius: 3px;
+    color: var(--accent);
+    padding: 0.4rem 0.55rem;
+    cursor: pointer;
+    line-height: 0;
+  }
+  .nav-toggle span {
+    display: block; width: 18px; height: 2px;
+    background: var(--accent); border-radius: 2px;
+    transition: transform 0.25s, opacity 0.2s;
+  }
+  .nav-toggle span + span { margin-top: 4px; }
+  .nav-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
   /* ── ANIMATIONS ── */
   .fade-up {
     opacity: 0;
@@ -583,27 +685,54 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
-    .hero-stats { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 2rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
-    section { padding: 4rem 1.5rem; }
+    nav { padding: 0.9rem 1.25rem; flex-wrap: wrap; }
+    .nav-logo { white-space: nowrap; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 0.9rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.5rem;
+    }
+    body.nav-open .nav-links { display: flex; }
+    .nav-links > li > a { display: block; padding: 0.7rem 0; font-size: 0.9rem; }
+    .nav-dropdown-menu { padding-left: 0.75rem; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.25rem 3rem; gap: 2.5rem; min-height: 0; }
+    .hero-name { font-size: clamp(2.6rem, 14vw, 4rem); }
+    .hero-stats { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1.75rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-divider { display: none; }
+    section { padding: 4rem 1.25rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-photo-wrap { max-width: 280px; }
+    .about-photo-wrap { max-width: 260px; }
     .project-card-inner { grid-template-columns: 1fr; }
-    .project-img { min-height: 180px; border-right: none; border-bottom: 1px solid var(--border); }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .project-img { min-height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+    .project-content { padding: 1.75rem 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; padding: 2rem 0; }
+    #contact { padding: 4.5rem 1.25rem; }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
+
+  /* prevent any fixed max-width from overflowing narrow screens */
+  .hero-subtitle, .about-body, .contact-body { max-width: min(46ch, 100%); }
+  .hero-tag { max-width: 100%; }
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
+
+body.nav-open nav{background:var(--navy)}
 </style>
+<noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#hero">MH / 2029</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li class="nav-dropdown">
       <a href="#projects" class="nav-dropdown-trigger">Projects <span class="caret">▾</span></a>
@@ -628,35 +757,37 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 <section id="hero">
   <div class="hero-grid-bg"></div>
   <div class="hero-text fade-up">
-    <div class="hero-tag">Mechanical Engineering · Class of 2029</div>
+    <div class="hero-availability"><span class="pulse-dot"></span>Seeking Summer 2027 Internship</div>
+    <div class="hero-tag">Mechanical Engineering · Northeastern University '29</div>
     <h1 class="hero-name">Matthew<br><em>Hong</em></h1>
     <p class="hero-subtitle">
-      Second-year Mechanical Engineering student at Northeastern University
-      with minors in Electrical Engineering and Business. Building autonomous systems,
-      pushing physical limits, and designing for the real world.
+      I build <strong>autonomous systems and test hardware</strong> — from an unmanned survey
+      vessel field-tested on the Thames to shock-and-vibration testing for aerospace and
+      defense clients. Mechanical design, embedded systems, and the software that ties them together.
     </p>
     <div class="hero-cta">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="#contact" class="btn-outline">Get in Touch</a>
+      <a href="resume.pdf" class="btn-primary" download>Download Résumé ↓</a>
+      <a href="#projects" class="btn-outline">View Projects</a>
+      <a href="mailto:hong.matt@northeastern.edu" class="btn-outline">Email Me</a>
     </div>
   </div>
   <div class="hero-stats fade-up" style="transition-delay:0.2s">
     <div class="stat-item">
-      <span class="stat-num">1</span>
-      <div class="stat-label">Semester</div>
-      <div class="stat-label" style="opacity:0.5; font-size:0.7rem;">to build DREAMS USV</div>
+      <span class="stat-num">3.76</span>
+      <div class="stat-label">GPA</div>
+      <div class="stat-sub">Mechanical Engineering · EE &amp; Business minors</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <span class="stat-num">£100</span>
-      <div class="stat-label">Project Budget</div>
-      <div class="stat-label" style="opacity:0.5; font-size:0.7rem;">autonomous USV, full sensor suite</div>
+      <span class="stat-num">75+</span>
+      <div class="stat-label">Shock &amp; Vibration Tests</div>
+      <div class="stat-sub">run for aerospace, defense &amp; industrial clients</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <span class="stat-num">1km</span>
-      <div class="stat-label">Wireless Range</div>
-      <div class="stat-label" style="opacity:0.5; font-size:0.7rem;">verified field communication</div>
+      <span class="stat-num">6</span>
+      <div class="stat-label">Documented Builds</div>
+      <div class="stat-sub">CAD, firmware, fabrication &amp; field testing</div>
     </div>
   </div>
 </section>
@@ -699,9 +830,10 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
         <span class="tag">Bay Area, CA (Hometown)</span>
       </div>
       <div class="about-links">
-        <a class="about-link" href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank">LinkedIn ↗</a>
-        <a class="about-link" href="https://github.com/matthewhong29" target="_blank">GitHub ↗</a>
-        <a class="about-link" href="#contact">Resume ↗</a>
+        <a class="about-link" href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="about-link" href="https://github.com/matthewhong29" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="about-link" href="resume.html">Résumé ↗</a>
+        <a class="about-link" href="mailto:hong.matt@northeastern.edu">Email ↗</a>
       </div>
     </div>
   </div>
@@ -718,7 +850,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder" style="background:none;">
-            <img src="images/dreams-st-katharine-docks.jpg" alt="DREAMS USV" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <img loading="lazy" decoding="async" src="images/dreams-st-katharine-docks.jpg" alt="DREAMS USV" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
           </div>
           <div class="project-img-tag">IN PROGRESS · WATER TESTED</div>
         </div>
@@ -762,7 +894,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder" style="background:none;">
-            <img src="images/golf-net-full-assembly-cad-model.jpg" alt="Golf Practice Net" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <img loading="lazy" decoding="async" src="images/golf-net-full-assembly-cad-model.jpg" alt="Golf Practice Net" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
           </div>
           <div class="project-img-tag">DIY · FABRICATION</div>
         </div>
@@ -800,7 +932,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder" style="background:none;">
-            <img src="images/fishing-clip-vest-side-cad-render.jpg" alt="Magnetic Fishing Rod Vest Clip" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <img loading="lazy" decoding="async" src="images/fishing-clip-vest-side-cad-render.jpg" alt="Magnetic Fishing Rod Vest Clip" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
           </div>
           <div class="project-img-tag">CAD · HARDWARE</div>
         </div>
@@ -839,15 +971,15 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder" style="background:none;">
-            <img src="images/accel-cabinet-dashboard.jpg" alt="Smart Accelerometer Cabinet manager dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top;position:absolute;inset:0;">
+            <img loading="lazy" decoding="async" src="images/accel-cabinet-dashboard.jpg" alt="Smart Accelerometer Cabinet manager dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top;position:absolute;inset:0;">
           </div>
-          <div class="project-img-tag">INTERNSHIP · IN PROGRESS</div>
+          <div class="project-img-tag">INTERNSHIP · SHIPPED</div>
         </div>
         <div class="project-content">
           <div>
             <div class="project-meta">
               <span class="project-year">2026</span>
-              <span class="project-status status-ongoing">In Progress</span>
+              <span class="project-status status-complete">v1 Complete</span>
             </div>
             <h3 class="project-title">Smart Accelerometer Cabinet</h3>
             <div class="project-role">Sole Developer · Quanta Labs Internship</div>
@@ -877,9 +1009,11 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
     <div class="project-card fade-up" style="transition-delay:0.35s">
       <div class="project-card-inner">
         <div class="project-img">
-          <div class="project-img-placeholder">
-            <div class="proj-icon">🤖</div>
-            <span>Add project photo</span>
+          <div class="project-img-placeholder blueprint">
+            <div class="bp-title">Maze Solver</div>
+            <div class="bp-spec">RP2040 · MicroPython</div>
+            <div class="bp-spec">Ultrasonic + IR sensing</div>
+            <div class="bp-spec">Tank drive · asyncio</div>
           </div>
           <div class="project-img-tag">TEAM PROJECT · ROBOTICS</div>
         </div>
@@ -918,7 +1052,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       <div class="project-card-inner">
         <div class="project-img">
           <div class="project-img-placeholder" style="background:none;">
-            <img src="images/compost-cover-cad-model.jpg" alt="Worm Compost Bin Cover" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <img loading="lazy" decoding="async" src="images/compost-cover-cad-model.jpg" alt="Worm Compost Bin Cover" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
           </div>
           <div class="project-img-tag">CAD · 3D PRINTING</div>
         </div>
@@ -1096,22 +1230,31 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
     <div class="section-label" style="text-align:center; display:block;">05 — Contact</div>
     <h2 class="section-title" style="text-align:center;">Let's Connect</h2>
     <p class="contact-body">
-      I'm always open to conversations about engineering internships, research opportunities,
-      Formula SAE, or anything related to aerospace, motorsports, or autonomous systems.
+      <strong style="color:var(--white);">I'm currently seeking a Summer 2027 engineering internship</strong> —
+      mechanical design, test engineering, autonomous systems, aerospace, or motorsports.
+      I reply to every message, and I'm happy to walk through any project here in detail.
     </p>
     <div class="contact-links">
-      <a href="mailto:hong.matt@northeastern.edu" class="btn-primary">School Email ↗</a>
-      <a href="mailto:hong2matthew@gmail.com" class="btn-outline">Personal Email ↗</a>
-      <a href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank" class="btn-outline">LinkedIn ↗</a>
-      <a href="https://github.com/matthewhong29" target="_blank" class="btn-outline">GitHub ↗</a>
+      <a href="mailto:hong.matt@northeastern.edu" class="btn-primary">Email Me ↗</a>
+      <a href="resume.pdf" class="btn-outline" download>Download Résumé ↓</a>
+      <a href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank" rel="noopener" class="btn-outline">LinkedIn ↗</a>
+      <a href="https://github.com/matthewhong29" target="_blank" rel="noopener" class="btn-outline">GitHub ↗</a>
     </div>
+    <p style="margin-top:1.75rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;color:var(--white-dim);">
+      hong.matt@northeastern.edu &nbsp;·&nbsp; hong2matthew@gmail.com &nbsp;·&nbsp; Boston, MA
+    </p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-copy">© 2026 Matthew Hong</span>
-  <span class="footer-tag">Northeastern University · Class of 2029</span>
+  <span class="footer-copy">© 2026 Matthew Hong · Boston, MA</span>
+  <span class="footer-tag" style="display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center;">
+    <a href="mailto:hong.matt@northeastern.edu" style="color:var(--accent);text-decoration:none;">Email</a>
+    <a href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">LinkedIn</a>
+    <a href="https://github.com/matthewhong29" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">GitHub</a>
+    <a href="resume.pdf" download style="color:var(--accent);text-decoration:none;">Résumé</a>
+  </span>
 </footer>
 
 <script>
@@ -1132,6 +1275,25 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // Mobile hamburger menu
+  const navToggle = document.getElementById('navToggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      const open = document.body.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    // close the menu after tapping any link inside it
+    document.querySelectorAll('#navLinks a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (!a.classList.contains('nav-dropdown-trigger')) {
+          document.body.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
 
   // Projects nav dropdown (hover on desktop, tap on mobile)
   document.querySelectorAll('.nav-dropdown').forEach(dd => {

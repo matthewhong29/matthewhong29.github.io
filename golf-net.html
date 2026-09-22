@@ -3,6 +3,21 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Golf Practice Net — Matthew Hong</title>
+<meta name="description" content="A 10x7x3 ft freestanding golf practice net with a custom PVC frame and 3D-printed ASA structural joints, engineered in CAD for impact and weather resistance.">
+<meta name="author" content="Matthew Hong">
+<meta name="theme-color" content="#faf7f1">
+<link rel="canonical" href="https://matthewhong29.github.io/golf-net.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Matthew Hong — Engineering Portfolio">
+<meta property="og:title" content="DIY Golf Practice Net — Matthew Hong">
+<meta property="og:description" content="A 10x7x3 ft freestanding golf practice net with a custom PVC frame and 3D-printed ASA structural joints, engineered in CAD for impact and weather resistance.">
+<meta property="og:url" content="https://matthewhong29.github.io/golf-net.html">
+<meta property="og:image" content="https://matthewhong29.github.io/images/golf-net-full-assembly-cad-model.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DIY Golf Practice Net — Matthew Hong">
+<meta name="twitter:description" content="A 10x7x3 ft freestanding golf practice net with a custom PVC frame and 3D-printed ASA structural joints, engineered in CAD for impact and weather resistance.">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/golf-net-full-assembly-cad-model.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -67,12 +82,34 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
 .footer-copy{font-family:var(--mono);font-size:0.72rem;color:var(--white-dimmer);letter-spacing:0.08em}
 @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.page-wrap{padding:7rem 1.5rem 4rem}.img-grid.cols-3,.img-grid.cols-2{grid-template-columns:1fr}footer{flex-direction:column;gap:0.5rem;padding:1.5rem}}
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
+/* ── responsive nav + focus states (added) ── */
+.nav-toggle{display:none;background:none;border:1px solid var(--border-accent);border-radius:3px;padding:0.4rem 0.55rem;cursor:pointer;line-height:0}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--accent);border-radius:2px;transition:transform .25s,opacity .2s}
+.nav-toggle span+span{margin-top:4px}
+body.nav-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+body.nav-open .nav-toggle span:nth-child(2){opacity:0}
+body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:900px){
+  nav{flex-wrap:wrap;padding:0.9rem 1.25rem}
+  .nav-logo{white-space:nowrap}
+  .nav-toggle{display:block}
+  .nav-links{display:none;width:100%;flex-direction:column;gap:0;margin-top:0.9rem;border-top:1px solid var(--border);padding-top:0.5rem}
+  body.nav-open .nav-links{display:flex}
+  .nav-links>li>a{display:block;padding:0.7rem 0;font-size:0.9rem}
+  .page-wrap{padding-left:1.25rem !important;padding-right:1.25rem !important}
+}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.fade-up{transition:none !important}}
+
+body.nav-open nav{background:var(--navy)}
 </style>
+<noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
 <nav>
   <a class="nav-logo" href="index.html">MH / 2029</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#projects">Projects</a></li>
     <li><a href="index.html#experience">Experience</a></li>
@@ -119,11 +156,11 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
         <div class="img-caption">Full assembly — SolidWorks model</div>
       </div>
       <div>
-        <img src="images/golf-net-4-way-angled-joint-cad.jpg" alt="4-way angled joint CAD">
+        <img loading="lazy" decoding="async" src="images/golf-net-4-way-angled-joint-cad.jpg" alt="4-way angled joint CAD">
         <div class="img-caption">4-way joint with angled brace port</div>
       </div>
       <div>
-        <img src="images/golf-net-3-way-corner-joint-cad.jpg" alt="3-way corner joint CAD">
+        <img loading="lazy" decoding="async" src="images/golf-net-3-way-corner-joint-cad.jpg" alt="3-way corner joint CAD">
         <div class="img-caption">Standard 3-way corner joint</div>
       </div>
     </div>
@@ -200,6 +237,25 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
 },{threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){
+  var t=document.getElementById('navToggle');
+  if(!t) return;
+  t.addEventListener('click',function(){
+    var open=document.body.classList.toggle('nav-open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.setAttribute('aria-label',open?'Close menu':'Open menu');
+  });
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click',function(){
+      if(!a.classList.contains('nav-dropdown-trigger')){
+        document.body.classList.remove('nav-open');
+        t.setAttribute('aria-expanded','false');
+      }
+    });
+  });
+})();
 </script>
 </body>
 </html>
