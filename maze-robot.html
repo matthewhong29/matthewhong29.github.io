@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autonomous Maze-Solving Robot — Matthew Hong</title>
-<meta name="description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
+<meta name="description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran: he led the robot CAD and firmware; I drew the concept sketches and designed the test maze.">
 <meta name="author" content="Matthew Hong">
 <meta name="theme-color" content="#faf7f1">
 <link rel="canonical" href="https://matthewhong29.github.io/maze-robot.html">
@@ -11,12 +11,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Matthew Hong — Engineering Portfolio">
 <meta property="og:title" content="Autonomous Maze-Solving Robot — Matthew Hong">
-<meta property="og:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
+<meta property="og:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran: he led the robot CAD and firmware; I drew the concept sketches and designed the test maze.">
 <meta property="og:url" content="https://matthewhong29.github.io/maze-robot.html">
 <meta property="og:image" content="https://matthewhong29.github.io/images/maze-robot-built.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Autonomous Maze-Solving Robot — Matthew Hong">
-<meta name="twitter:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
+<meta name="twitter:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran: he led the robot CAD and firmware; I drew the concept sketches and designed the test maze.">
 <meta name="twitter:image" content="https://matthewhong29.github.io/images/maze-robot-built.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -167,10 +167,10 @@ body.nav-open nav{background:var(--navy)}
 
   <div class="proj-section fade-up">
     <span class="section-label">02 — My Role</span>
-    <h2 class="section-title">Partner, Not Lead Designer</h2>
+    <h2 class="section-title">My Contributions</h2>
     <div class="body-text">
-      <p>Kyle led this project — he designed the full robot in CAD and wrote all of the MicroPython firmware. I partnered with him on the build, and while I was still learning CAD from him at the time, I modeled a handful of smaller components myself under his guidance rather than just watching.</p>
-      <p>I'm including this here because it was a real part of how I learned CAD, not to claim ownership of Kyle's design or code — full credit for the mechanical design and firmware belongs to him.</p>
+      <p>Kyle led the robot itself: he designed the full robot in CAD and wrote all of the MicroPython firmware. My part was the early <strong>concept sketches</strong> of the chassis and the <strong>test maze</strong> the robot had to solve. I laid the maze out and dimensioned it in AutoCAD and designed the <strong>3D-printed corner brackets</strong> that join its walls. I also modeled a handful of smaller robot components while learning CAD from Kyle.</p>
+      <p>Full credit for the robot's CAD and firmware belongs to Kyle. His writeup is linked below.</p>
     </div>
   </div>
 
@@ -208,20 +208,21 @@ body.nav-open nav{background:var(--navy)}
   <div class="proj-section fade-up">
     <span class="section-label">04 — Design &amp; Testing</span>
     <h2 class="section-title">From Sketch to Maze</h2>
+    <div class="body-text"><p>My side of the build: the early concept sketches and the test maze itself, from the AutoCAD layout to the 3D-printed corner brackets that join its walls.</p></div>
     <div class="img-grid cols-3">
-      <div><img class="fit" src="images/maze-sketch-chassis.jpg" alt="Hand sketch of the chassis from above, with angled sensor mounts" loading="lazy"><div class="img-caption">Concept sketch: chassis from above with angled sensor mounts</div></div>
-      <div><img class="fit" src="images/maze-sketch-concepts.jpg" alt="Notebook pages of early robot and component sketches" loading="lazy"><div class="img-caption">Early concept sketches</div></div>
+      <div><img class="fit" src="images/maze-sketch-chassis.jpg" alt="Hand sketch of the chassis from above, with angled sensor mounts" loading="lazy"><div class="img-caption">My concept sketch: chassis from above with angled sensor mounts</div></div>
+      <div><img class="fit" src="images/maze-sketch-concepts.jpg" alt="Notebook pages of early robot and component sketches" loading="lazy"><div class="img-caption">My early concept sketches</div></div>
       <div><img class="fit" src="images/maze-sensor-fov-sketch.jpg" alt="Top-view chassis sketch with dashed cones showing each ultrasonic sensor's field of view" loading="lazy"><div class="img-caption">Chassis sketch with each ultrasonic sensor's field of view</div></div>
-      <div><img class="fit-dark" src="images/maze-layout-autocad.jpg" alt="AutoCAD drawing of the test maze with wall lengths and angles dimensioned" loading="lazy"><div class="img-caption">Test maze layout, dimensioned in AutoCAD</div></div>
-      <div><img class="fit" src="images/maze-corner-bracket.jpg" alt="Black 3D-printed slotted 90-degree corner bracket" loading="lazy"><div class="img-caption">3D-printed slotted corner bracket</div></div>
-      <div><img src="images/maze-course-test.jpg" alt="Overhead view of the cardboard test maze with the robot inside" loading="lazy"><div class="img-caption">Test setup: the robot and the cardboard maze</div></div>
+      <div><img class="fit-dark" src="images/maze-layout-autocad.jpg" alt="AutoCAD drawing of the test maze with wall lengths and angles dimensioned" loading="lazy"><div class="img-caption">Test maze I laid out and dimensioned in AutoCAD</div></div>
+      <div><img class="fit" src="images/maze-corner-bracket.jpg" alt="Black 3D-printed slotted 90-degree corner bracket" loading="lazy"><div class="img-caption">3D-printed corner bracket I designed to join the maze walls</div></div>
+      <div><img src="images/maze-course-test.jpg" alt="Overhead view of the cardboard test maze with the robot inside" loading="lazy"><div class="img-caption">The finished test maze, with the robot inside</div></div>
     </div>
   </div>
 
   <div class="proj-section fade-up">
     <span class="section-label">05 — Credit &amp; Full Writeup</span>
     <div class="future-box">
-      <div class="future-box-title">Design & Firmware Credit — Kyle Tran</div>
+      <div class="future-box-title">Robot Design &amp; Firmware Credit — Kyle Tran</div>
       <div class="future-box-body">
         For the full writeup, CAD, and firmware, see <a href="https://ka1e27.github.io/Portfolio/" target="_blank" rel="noopener">Kyle's portfolio</a>, the <a href="https://cad.onshape.com/documents/9b8fc3ab8fe23ef6042ec63c/w/d19151a11b2c24d0ce20b822/e/751e13f635af431919cfeaf5" target="_blank" rel="noopener">Onshape CAD</a>, and the <a href="https://github.com/ka1e27/Autonomous-Maze-Navigation-Robot" target="_blank" rel="noopener">firmware repository</a>.
       </div>
