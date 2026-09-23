@@ -13,11 +13,11 @@
 <meta property="og:title" content="Autonomous Maze-Solving Robot — Matthew Hong">
 <meta property="og:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
 <meta property="og:url" content="https://matthewhong29.github.io/maze-robot.html">
-<meta property="og:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta property="og:image" content="https://matthewhong29.github.io/images/maze-robot-built.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Autonomous Maze-Solving Robot — Matthew Hong">
 <meta name="twitter:description" content="A tank-drive robot that autonomously maps and solves an unseen maze on a single Raspberry Pi Pico. A partner project with Kyle Tran, who led the CAD and firmware.">
-<meta name="twitter:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/maze-robot-built.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -94,6 +94,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 @media (prefers-reduced-motion: reduce){.fade-up{transition:none !important}}
 
 body.nav-open nav{background:var(--navy)}
+
+/* ── photos ── */
+.img-grid{display:grid;gap:4px;margin-top:1.5rem;border-radius:4px;overflow:hidden}
+.img-grid.cols-2{grid-template-columns:1fr 1fr}
+.img-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.img-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--navy-3)}
+.img-grid img.fit{object-fit:contain;background:#fff}
+.img-grid img.fit-dark{object-fit:contain;background:#212830}
+.img-caption{font-family:var(--mono);font-size:0.68rem;color:var(--white-dimmer);letter-spacing:0.06em;line-height:1.5;margin:0.5rem 0 0.75rem}
+.lead-figs{margin:0 0 1rem}
+@media(max-width:900px){.img-grid.cols-2,.img-grid.cols-3{grid-template-columns:1fr}}
+
+/* ── image viewer (click any photo to enlarge) ── */
+.page-wrap img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:10000;background:rgba(20,17,14,0.93);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4.5rem 4vw 2rem;cursor:zoom-out}
+.lb[hidden]{display:none}
+.lb-img{max-width:100%;max-height:82vh;object-fit:contain;border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,0.45);cursor:zoom-out}
+.lb-cap{margin-top:1rem;font-family:var(--mono);font-size:0.74rem;letter-spacing:0.05em;color:rgba(250,247,241,0.9);text-align:center;max-width:70ch}
+.lb-close{position:absolute;top:1rem;right:1.25rem;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid rgba(250,247,241,0.45);background:rgba(20,17,14,0.4);color:#faf7f1;font-size:1.4rem;line-height:1;cursor:pointer}
+.lb-close:focus-visible{outline:2px solid #faf7f1;outline-offset:3px}
 </style>
 <noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
@@ -122,6 +142,17 @@ body.nav-open nav{background:var(--navy)}
       <span class="badge">Tank Drive</span>
       <span class="badge">Autonomous Navigation</span>
       <span class="badge badge-green">Completed</span>
+    </div>
+  </div>
+
+  <div class="img-grid cols-2 lead-figs fade-up">
+    <div>
+      <img src="images/maze-robot-built.jpg" alt="The finished maze-solving robot: tank tracks, yellow gear motors, an LCD status screen, and a Raspberry Pi Pico on a breadboard">
+      <div class="img-caption">The finished robot: tank drive, Pico on a breadboard, LCD status screen</div>
+    </div>
+    <div>
+      <img class="fit" src="images/maze-robot-cad-render.jpg" alt="Onshape CAD render of the robot chassis with wheels, ultrasonic sensors, and the Pico mount">
+      <div class="img-caption">Full robot CAD in Onshape (design by Kyle Tran)</div>
     </div>
   </div>
 
@@ -175,7 +206,20 @@ body.nav-open nav{background:var(--navy)}
   </div>
 
   <div class="proj-section fade-up">
-    <span class="section-label">04 — Credit & Full Writeup</span>
+    <span class="section-label">04 — Design &amp; Testing</span>
+    <h2 class="section-title">From Sketch to Maze</h2>
+    <div class="img-grid cols-3">
+      <div><img class="fit" src="images/maze-sketch-chassis.jpg" alt="Hand sketch of the chassis from above, with angled sensor mounts" loading="lazy"><div class="img-caption">Concept sketch: chassis from above with angled sensor mounts</div></div>
+      <div><img class="fit" src="images/maze-sketch-concepts.jpg" alt="Notebook pages of early robot and component sketches" loading="lazy"><div class="img-caption">Early concept sketches</div></div>
+      <div><img class="fit" src="images/maze-sensor-fov-sketch.jpg" alt="Top-view chassis sketch with dashed cones showing each ultrasonic sensor's field of view" loading="lazy"><div class="img-caption">Chassis sketch with each ultrasonic sensor's field of view</div></div>
+      <div><img class="fit-dark" src="images/maze-layout-autocad.jpg" alt="AutoCAD drawing of the test maze with wall lengths and angles dimensioned" loading="lazy"><div class="img-caption">Test maze layout, dimensioned in AutoCAD</div></div>
+      <div><img class="fit" src="images/maze-corner-bracket.jpg" alt="Black 3D-printed slotted 90-degree corner bracket" loading="lazy"><div class="img-caption">3D-printed slotted corner bracket</div></div>
+      <div><img src="images/maze-course-test.jpg" alt="Overhead view of the cardboard test maze with the robot inside" loading="lazy"><div class="img-caption">Test setup: the robot and the cardboard maze</div></div>
+    </div>
+  </div>
+
+  <div class="proj-section fade-up">
+    <span class="section-label">05 — Credit &amp; Full Writeup</span>
     <div class="future-box">
       <div class="future-box-title">Design & Firmware Credit — Kyle Tran</div>
       <div class="future-box-body">
@@ -217,6 +261,38 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       }
     });
   });
+})();
+</script>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <button class="lb-close" type="button" aria-label="Close image">&times;</button>
+  <img class="lb-img" alt="">
+  <p class="lb-cap"></p>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var big=lb.querySelector('.lb-img'), cap=lb.querySelector('.lb-cap'), btn=lb.querySelector('.lb-close'), last=null;
+  function captionFor(img){
+    var n=img.nextElementSibling;
+    if(n && /(^|\s)(img-caption|gallery-caption)(\s|$)/.test(n.className)) return n.textContent.trim();
+    var c=img.parentElement.querySelector('.gallery-caption,.img-caption');
+    return c ? c.textContent.trim() : (img.alt||'');
+  }
+  function open(img){
+    last=img; big.src=img.currentSrc||img.src; big.alt=img.alt||''; cap.textContent=captionFor(img);
+    lb.hidden=false; document.body.style.overflow='hidden'; btn.focus();
+  }
+  function close(){
+    lb.hidden=true; big.removeAttribute('src'); document.body.style.overflow=''; if(last) last.focus();
+  }
+  document.querySelectorAll('.page-wrap img').forEach(function(img){
+    img.setAttribute('tabindex','0'); img.setAttribute('role','button');
+    img.setAttribute('aria-label','Enlarge image: '+(img.alt||'photo'));
+    img.addEventListener('click',function(){ open(img); });
+    img.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(img); } });
+  });
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !lb.hidden) close(); });
 })();
 </script>
 </body>
