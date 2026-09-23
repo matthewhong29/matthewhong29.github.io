@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matthew Hong — Engineering Portfolio</title>
+<title>Matthew Hong — Mechanical Engineering Portfolio | Northeastern</title>
 <meta name="description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
 <meta name="author" content="Matthew Hong">
 <meta name="theme-color" content="#faf7f1">
@@ -14,18 +14,21 @@
 <meta property="og:title" content="Matthew Hong — Mechanical Engineering | Northeastern '29">
 <meta property="og:description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
 <meta property="og:url" content="https://matthewhong29.github.io/">
-<meta property="og:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta property="og:image" content="https://matthewhong29.github.io/images/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Matthew Hong, Mechanical Engineering, Northeastern '29, with the D.R.E.A.M.S. autonomous boat at St Katharine Docks">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Matthew Hong — Mechanical Engineering | Northeastern '29">
 <meta name="twitter:description" content="Mechanical Engineering student at Northeastern University building autonomous systems and test hardware. 75+ shock and vibration tests run for aerospace and defense clients. Seeking a Summer 2027 engineering internship.">
-<meta name="twitter:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/og-card.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Matthew Hong",
   "url": "https://matthewhong29.github.io/",
-  "image": "https://matthewhong29.github.io/images/matthew-headshot.jpg",
+  "image": "https://matthewhong29.github.io/images/matthew-hong.jpg",
   "jobTitle": "Mechanical Engineering Student",
   "email": "mailto:hong.matt@northeastern.edu",
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Northeastern University" },
@@ -45,14 +48,14 @@
     --navy: #faf7f1;
     --navy-2: #f2ece1;
     --navy-3: #e9e0cf;
-    --accent: #a8562f;
-    --accent-dim: rgba(168,86,47,0.14);
-    --accent-dim2: rgba(168,86,47,0.07);
+    --accent: #984e2b;
+    --accent-dim: rgba(152,78,43,0.09);
+    --accent-dim2: rgba(152,78,43,0.07);
     --white: #2b2620;
-    --white-dim: rgba(43,38,32,0.62);
-    --white-dimmer: rgba(43,38,32,0.56);
+    --white-dim: rgba(43,38,32,0.74);
+    --white-dimmer: rgba(43,38,32,0.68);
     --border: rgba(43,38,32,0.10);
-    --border-accent: rgba(168,86,47,0.35);
+    --border-accent: rgba(152,78,43,0.35);
     --serif: 'DM Serif Display', serif;
     --sans: 'Outfit', sans-serif;
     --mono: 'DM Mono', monospace;
@@ -102,13 +105,21 @@
     position: relative;
   }
   .nav-dropdown-trigger .caret {
-    font-size: 0.7em;
-    margin-left: 0.25em;
     display: inline-block;
+    width: 0.38em; height: 0.38em;
+    margin-left: 0.5em;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-0.2em) rotate(45deg);
     transition: transform 0.2s ease;
   }
-  .nav-dropdown.open .nav-dropdown-trigger .caret {
-    transform: rotate(180deg);
+  .nav-dropdown.open .nav-dropdown-trigger .caret,
+  .nav-dropdown:hover .nav-dropdown-trigger .caret {
+    transform: translateY(0.05em) rotate(-135deg);
+  }
+  /* invisible bridge so the menu doesn't close while the pointer crosses the gap */
+  .nav-dropdown-menu::before {
+    content: ''; position: absolute; left: 0; right: 0; top: -1rem; height: 1rem;
   }
   .nav-dropdown-menu {
     position: absolute;
@@ -156,7 +167,11 @@
       border: none;
       padding-left: 1rem;
     }
+    .nav-dropdown-menu::before { display: none; }
     .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    /* the desktop centring transform would otherwise push the list half off-screen */
+    .nav-dropdown.open .nav-dropdown-menu,
+    .nav-dropdown:hover .nav-dropdown-menu { transform: none; }
   }
 
   /* ── HERO ── */
@@ -173,7 +188,7 @@
   #hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(168,86,47,0.05) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(152,78,43,0.05) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-grid-bg {
@@ -313,6 +328,7 @@
   }
   .about-photo-wrap {
     position: relative;
+    max-width: 440px;
   }
   .about-photo-placeholder {
     width: 100%;
@@ -336,7 +352,7 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 40%;
-    background: linear-gradient(transparent, rgba(168,86,47,0.06));
+    background: linear-gradient(transparent, rgba(152,78,43,0.06));
   }
   .photo-icon {
     width: 48px; height: 48px;
@@ -486,8 +502,8 @@
     padding: 0.2rem 0.6rem;
     border-radius: 2px;
   }
-  .status-complete { background: rgba(79,107,63,0.16); color: #4f6b3f; border: 1px solid rgba(79,107,63,0.32); }
-  .status-ongoing { background: rgba(168,86,47,0.12); color: var(--accent); border: 1px solid var(--border-accent); }
+  .status-complete { background: rgba(79,107,63,0.16); color: #3f5c31; border: 1px solid rgba(79,107,63,0.32); }
+  .status-ongoing { background: rgba(152,78,43,0.08); color: var(--accent); border: 1px solid var(--border-accent); }
   .project-title {
     font-family: var(--serif);
     font-size: 1.6rem;
@@ -653,7 +669,7 @@
   }
   .pulse-dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: #4f6b3f;
+    background: #3f5c31;
     flex-shrink: 0;
     box-shadow: 0 0 0 0 rgba(79,107,63,0.6);
     animation: pulse 2.4s infinite;
@@ -738,6 +754,37 @@
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
 
 body.nav-open nav{background:var(--navy)}
+
+  /* ── EXPERIENCE BULLETS ── */
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem; color: var(--white-dim); line-height: 1.7; }
+  .exp-bullets li { position: relative; padding-left: 1.1rem; }
+  .exp-bullets li::before { content: ''; position: absolute; left: 0; top: 0.72em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.7; }
+  .exp-bullets strong { color: var(--white); font-weight: 500; }
+
+  /* ── CONTACT: copyable email ── */
+  .contact-meta { margin-top: 1.75rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--white-dim); }
+  .copy-email { font: inherit; letter-spacing: inherit; color: var(--white); background: none; border: none; border-bottom: 1px dashed var(--border-accent); padding: 0.35rem 0; cursor: pointer; }
+  .copy-email:hover { color: var(--accent); }
+  .copy-hint { margin-left: 0.45rem; color: var(--accent); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.12em; }
+
+  /* ── FOCUS + MOTION ── */
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* ── PHONE TIGHTENING ── */
+  @media (max-width: 900px) {
+    section[id] { scroll-margin-top: 2.5rem; }
+    .hero-stats .stat-item:last-child { grid-column: 1 / -1; }
+    .hero-stats .stat-item:last-child .stat-sub { max-width: none; }
+    .about-links { gap: 0.25rem 1.25rem; }
+    .about-link { display: inline-block; padding: 0.6rem 0 0.3rem; }
+    .skills-grid { gap: 0.9rem; }
+    .skill-group { padding: 1.25rem; }
+    .skill-group-title { margin-bottom: 0.9rem; }
+    .skill-list { flex-direction: row; flex-wrap: wrap; gap: 0.45rem; }
+    .skill-list li { font-size: 0.8rem; border: 1px solid var(--border); border-radius: 2px; padding: 0.2rem 0.55rem; background: var(--navy); }
+    .skill-list li::before { display: none; }
+  }
 </style>
 <noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
@@ -752,7 +799,7 @@ body.nav-open nav{background:var(--navy)}
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li class="nav-dropdown">
-      <a href="#projects" class="nav-dropdown-trigger">Projects <span class="caret">▾</span></a>
+      <a href="#projects" class="nav-dropdown-trigger">Projects <span class="caret" aria-hidden="true"></span></a>
       <ul class="nav-dropdown-menu">
         <li><a href="dreams.html">D.R.E.A.M.S. USV</a></li>
         <li><a href="golf-net.html">DIY Golf Practice Net</a></li>
@@ -783,7 +830,7 @@ body.nav-open nav{background:var(--navy)}
       defense clients. Mechanical design, embedded systems, and the software that ties them together.
     </p>
     <div class="hero-cta">
-      <a href="resume.pdf" class="btn-primary" download>Download Résumé ↓</a>
+      <a href="resume.pdf" class="btn-primary" download="Matthew_Hong_Resume.pdf">Download Résumé ↓</a>
       <a href="#projects" class="btn-outline">View Projects</a>
       <a href="mailto:hong.matt@northeastern.edu" class="btn-outline">Email Me</a>
     </div>
@@ -814,7 +861,7 @@ body.nav-open nav{background:var(--navy)}
   <div class="section-label">01 — About</div>
   <div class="about-grid">
     <div class="about-photo-wrap fade-up">
-      <img src="images/matthew-headshot.jpg" alt="Matthew Hong" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block;">
+      <img src="images/matthew-hong.jpg" alt="Matthew Hong at the D.R.E.A.M.S. final presentation, Northeastern University London" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;border:1px solid var(--border);display:block;">
       <div class="about-accent-bar"></div>
     </div>
     <div class="about-content fade-up" style="transition-delay:0.15s">
@@ -878,15 +925,14 @@ body.nav-open nav{background:var(--navy)}
               <span class="project-status status-ongoing">In Progress</span>
             </div>
             <h3 class="project-title">D.R.E.A.M.S.</h3>
-            <div class="project-role">Co-Lead · Mechanical & Structural · Planning & Communications</div>
+            <div class="project-role">Co-Lead · Mechanical &amp; Structural · Firmware · Planning &amp; Comms</div>
             <p class="project-desc">
-              Data Recovery and Environmental Assessment for Marine Surveillance. A fully autonomous
-              unmanned surface vehicle (USV) developed to collect environmental data in degraded aquatic
-              ecosystems. Built as a two-person first-year project within a single semester on a £100 budget.
-              Features a custom waterproof sensor pod, 1km verified wireless range, three dedicated Raspberry Pi Pico microcontrollers (vessel, sensor pod, and shore station), comprehensive fault-tolerant
-              safety systems, and structured data output formatted for Excel import. Components were modeled
-              in SolidWorks with bilateral tolerances for 3D printing, including a Van Veen grab sediment
-              sampler delivered with a complete engineering drawing package and BOM.
+              A fully autonomous unmanned surface vehicle (USV) that navigates to GPS waypoints, winches a
+              custom waterproof sensor pod down to profile water temperature, salinity, and light, and radios
+              the data to shore over a 1&nbsp;km verified link. Built with teammate Kyle Tran in one semester on a
+              £100 budget and water-tested at St Katharine Docks, London. I co-led the mechanical and structural
+              design in SolidWorks — including a Van Veen grab sediment sampler delivered with a full drawing
+              package and BOM — and co-wrote the MicroPython firmware with Kyle.
             </p>
           </div>
           <div class="project-tags">
@@ -899,8 +945,9 @@ body.nav-open nav{background:var(--navy)}
             <span class="project-tag">Fault-Tolerant Systems</span>
             <span class="project-tag">3D Printing</span>
           </div>
-          <div style="margin-top:1.5rem">
+          <div style="margin-top:1.5rem;display:flex;gap:0.6rem;flex-wrap:wrap">
             <a href="dreams.html" class="btn-primary" style="font-size:0.78rem;padding:0.65rem 1.5rem;">View Full Project →</a>
+            <a href="dreams.html#video" class="btn-outline" style="font-size:0.78rem;padding:0.65rem 1.5rem;">▶ Watch It Run</a>
           </div>
         </div>
       </div>
@@ -1001,12 +1048,10 @@ body.nav-open nav{background:var(--navy)}
             <h3 class="project-title">Magnetic Fishing Rod Vest Clip</h3>
             <div class="project-role">Designer & Builder · Solo Project</div>
             <p class="project-desc">
-              A DIY magnetic quick-release system for attaching a fishing rod to a vest — eliminating the
-              need to set the rod down between casts. The vest-side housing features a D-ring loop and ribbed
-              internal gusset structure for load transfer. The rod-side clamp uses four curved spring fingers
-              that flex to snap around the rod blank and retain it under load. Both housings share a dual N52
-              neodymium magnet base spaced to resist rotation and provide predictable release. Epoxy-coated
-              magnets selected for corrosion resistance in outdoor environments.
+              A two-part magnetic quick-release that holds a fly rod on a fishing vest between casts. The
+              vest-side housing carries pull loads through a ribbed internal gusset; the rod-side clamp snaps
+              onto the blank with four curved spring fingers. Paired epoxy-coated N52 magnets are spaced to
+              resist rotation and give a predictable release direction.
             </p>
           </div>
           <div class="project-tags">
@@ -1105,7 +1150,7 @@ body.nav-open nav{background:var(--navy)}
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-label">03 — Experience</div>
-  <h2 class="section-title">Professional Background</h2>
+  <h2 class="section-title">Experience &amp; Education</h2>
   <div class="exp-list">
 
     <div class="exp-item fade-up">
@@ -1113,14 +1158,13 @@ body.nav-open nav{background:var(--navy)}
       <div class="exp-content">
         <div class="exp-title">Intern — Shock and Vibration Team</div>
         <div class="exp-company">Quanta Labs · Santa Clara, CA</div>
-        <p class="exp-desc">
-          Conducted over 75 shock and vibration tests and interfaced directly with aerospace, defense, and
-          industrial clients to support project deliverables. Authored and organized standard operating
-          procedures supporting compliance with company quality-system requirements, and set up and monitored
-          multi-hour stress tests. Customized and fabricated a three-dimensional test environment to meet
-          customers' high-precision test requirements, and designed a Flask/SQLite web application that replaced
-          manual accelerometer tracking with PIN-based checkout, calibration-due alerts, and full audit history.
-        </p>
+        <ul class="exp-bullets">
+          <li>Ran <strong>75+ shock and vibration tests</strong> and worked directly with aerospace, defense, and industrial clients on project deliverables</li>
+          <li>Designed and built a <strong>Flask/SQLite web app</strong> that replaced manual tracking of a 125+ unit accelerometer inventory with PIN-based checkout, calibration-due alerts, and full audit history</li>
+          <li>Customized and fabricated a three-dimensional test environment to meet customers' high-precision test requirements</li>
+          <li>Authored and organized standard operating procedures supporting quality-system compliance; set up and monitored multi-hour stress tests</li>
+          <li>2023: supported battery testing for automotive and energy-sector clients — test setup, data collection, and reporting under senior engineers</li>
+        </ul>
         <div style="margin-top:1rem">
           <a href="quanta-labs.html" style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--border-accent);padding-bottom:1px;">View Experience Page →</a>
         </div>
@@ -1158,8 +1202,8 @@ body.nav-open nav{background:var(--navy)}
         <div class="exp-title">TA / Intern</div>
         <div class="exp-company">Boys &amp; Girls Club of the Peninsula · San Mateo, CA</div>
         <p class="exp-desc">
-          Taught and designed STEAM lessons for students ages 5–13, gave talks on life skills drawing on personal
-          experience, and organized snacks and recess activities for the group.
+          Designed and taught STEAM lessons for students ages 5–13 and gave talks on life skills drawing on
+          personal experience.
         </p>
       </div>
     </div>
@@ -1253,12 +1297,13 @@ body.nav-open nav{background:var(--navy)}
     </p>
     <div class="contact-links">
       <a href="mailto:hong.matt@northeastern.edu" class="btn-primary">Email Me ↗</a>
-      <a href="resume.pdf" class="btn-outline" download>Download Résumé ↓</a>
+      <a href="resume.pdf" class="btn-outline" download="Matthew_Hong_Resume.pdf">Download Résumé ↓</a>
       <a href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank" rel="noopener" class="btn-outline">LinkedIn ↗</a>
       <a href="https://github.com/matthewhong29" target="_blank" rel="noopener" class="btn-outline">GitHub ↗</a>
     </div>
-    <p style="margin-top:1.75rem;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;color:var(--white-dim);">
-      hong.matt@northeastern.edu &nbsp;·&nbsp; hong2matthew@gmail.com &nbsp;·&nbsp; Boston, MA
+    <p class="contact-meta">
+      <button type="button" class="copy-email" data-email="hong.matt@northeastern.edu">hong.matt@northeastern.edu<span class="copy-hint" aria-live="polite">Copy</span></button>
+      &nbsp;·&nbsp; hong2matthew@gmail.com &nbsp;·&nbsp; Boston, MA
     </p>
   </div>
 </section>
@@ -1270,7 +1315,7 @@ body.nav-open nav{background:var(--navy)}
     <a href="mailto:hong.matt@northeastern.edu" style="color:var(--accent);text-decoration:none;">Email</a>
     <a href="https://www.linkedin.com/in/matthew-hong-b64a79312" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">LinkedIn</a>
     <a href="https://github.com/matthewhong29" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">GitHub</a>
-    <a href="resume.pdf" download style="color:var(--accent);text-decoration:none;">Résumé</a>
+    <a href="resume.pdf" download="Matthew_Hong_Resume.pdf" style="color:var(--accent);text-decoration:none;">Résumé</a>
   </span>
 </footer>
 
@@ -1295,11 +1340,16 @@ body.nav-open nav{background:var(--navy)}
     });
   });
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
+  // Copy email (mailto links do nothing on machines without a mail app configured)
+  document.querySelectorAll('.copy-email').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const hint = btn.querySelector('.copy-hint');
+      const email = btn.dataset.email;
+      if (!navigator.clipboard) { window.location.href = 'mailto:' + email; return; }
+      navigator.clipboard.writeText(email).then(() => {
+        hint.textContent = 'Copied ✓';
+        setTimeout(() => { hint.textContent = 'Copy'; }, 2000);
+      }, () => { window.location.href = 'mailto:' + email; });
     });
   });
 

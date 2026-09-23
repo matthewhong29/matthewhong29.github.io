@@ -14,11 +14,14 @@
 <meta property="og:title" content="All Projects — Matthew Hong">
 <meta property="og:description" content="Engineering projects by Matthew Hong: an autonomous unmanned survey vessel, CAD and 3D-printed hardware, a Flask test-lab inventory system, and robotics.">
 <meta property="og:url" content="https://matthewhong29.github.io/projects.html">
-<meta property="og:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta property="og:image" content="https://matthewhong29.github.io/images/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Matthew Hong, Mechanical Engineering, Northeastern '29, with the D.R.E.A.M.S. autonomous boat at St Katharine Docks">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="All Projects — Matthew Hong">
 <meta name="twitter:description" content="Engineering projects by Matthew Hong: an autonomous unmanned survey vessel, CAD and 3D-printed hardware, a Flask test-lab inventory system, and robotics.">
-<meta name="twitter:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/og-card.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -28,14 +31,14 @@
     --navy: #faf7f1;
     --navy-2: #f2ece1;
     --navy-3: #e9e0cf;
-    --accent: #a8562f;
-    --accent-dim: rgba(168,86,47,0.14);
-    --accent-dim2: rgba(168,86,47,0.07);
+    --accent: #984e2b;
+    --accent-dim: rgba(152,78,43,0.09);
+    --accent-dim2: rgba(152,78,43,0.07);
     --white: #2b2620;
-    --white-dim: rgba(43,38,32,0.62);
-    --white-dimmer: rgba(43,38,32,0.56);
+    --white-dim: rgba(43,38,32,0.74);
+    --white-dimmer: rgba(43,38,32,0.68);
     --border: rgba(43,38,32,0.10);
-    --border-accent: rgba(168,86,47,0.35);
+    --border-accent: rgba(152,78,43,0.35);
     --serif: 'DM Serif Display', serif;
     --sans: 'Outfit', sans-serif;
     --mono: 'DM Mono', monospace;
@@ -66,8 +69,10 @@
   .nav-links a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-dropdown { position: relative; }
-  .nav-dropdown-trigger .caret { font-size: 0.65rem; margin-left: 0.2rem; display: inline-block; transition: transform 0.2s; }
-  .nav-dropdown.open .nav-dropdown-trigger .caret { transform: rotate(180deg); }
+  .nav-dropdown-trigger .caret { display: inline-block; width: 0.38em; height: 0.38em; margin-left: 0.5em; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-0.2em) rotate(45deg); transition: transform 0.2s; }
+  .nav-dropdown.open .nav-dropdown-trigger .caret, .nav-dropdown:hover .nav-dropdown-trigger .caret { transform: translateY(0.05em) rotate(-135deg); }
+  /* invisible bridge so the menu doesn't close while the pointer crosses the gap */
+  .nav-dropdown-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -1rem; height: 1rem; }
   .nav-dropdown-menu {
     position: absolute; top: 140%; left: 0; min-width: 220px;
     background: var(--navy-2); border: 1px solid var(--border); border-radius: 4px;
@@ -80,6 +85,7 @@
     nav { padding: 1rem 1.5rem; }
     .nav-links { gap: 1.5rem; }
     .nav-dropdown-menu { position: static; display: none; border: none; padding-left: 1rem; }
+    .nav-dropdown-menu::before { display: none; }
     .nav-dropdown.open .nav-dropdown-menu { display: block; }
   }
 
@@ -143,8 +149,8 @@
   .card-meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
   .card-year { font-family: var(--mono); font-size: 0.7rem; color: var(--white-dimmer); letter-spacing: 0.05em; }
   .card-status { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; padding: 0.15rem 0.55rem; border-radius: 20px; text-transform: uppercase; }
-  .status-ongoing { background: rgba(168,86,47,0.12); color: var(--accent); border: 1px solid var(--border-accent); }
-  .status-complete { background: rgba(79,107,63,0.16); color: #4f6b3f; border: 1px solid rgba(79,107,63,0.32); }
+  .status-ongoing { background: rgba(152,78,43,0.08); color: var(--accent); border: 1px solid var(--border-accent); }
+  .status-complete { background: rgba(79,107,63,0.16); color: #3f5c31; border: 1px solid rgba(79,107,63,0.32); }
   .card-title { font-family: var(--serif); font-size: 1.25rem; color: var(--white); margin-bottom: 0.35rem; line-height: 1.2; }
   .card-role { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; }
   .card-desc { font-size: 0.84rem; color: var(--white-dim); line-height: 1.65; flex: 1; }
@@ -203,7 +209,7 @@ body.nav-open nav{background:var(--navy)}
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html#about">About</a></li>
     <li class="nav-dropdown">
-      <a href="index.html#projects" class="nav-dropdown-trigger">Projects <span class="caret">▾</span></a>
+      <a href="index.html#projects" class="nav-dropdown-trigger">Projects <span class="caret" aria-hidden="true"></span></a>
       <ul class="nav-dropdown-menu">
         <li><a href="dreams.html">D.R.E.A.M.S. USV</a></li>
         <li><a href="golf-net.html">DIY Golf Practice Net</a></li>
@@ -242,9 +248,9 @@ body.nav-open nav{background:var(--navy)}
             <span class="card-year">2025–2026</span>
             <span class="card-status status-ongoing">In Progress</span>
           </div>
-          <h3 class="card-title">D.R.E.A.M.S.</h3>
-          <div class="card-role">Co-Lead · Mechanical & Structural</div>
-          <p class="card-desc">A fully autonomous unmanned surface vehicle built to collect environmental data in degraded aquatic ecosystems — water-tested at St Katharine Docks, London.</p>
+          <h2 class="card-title">D.R.E.A.M.S.</h2>
+          <div class="card-role">Co-Lead · Mechanical, Structural &amp; Firmware</div>
+          <p class="card-desc">A fully autonomous unmanned surface vehicle built to collect environmental data in degraded aquatic ecosystems — built with Kyle Tran and water-tested at St Katharine Docks, London.</p>
           <div class="card-link">View Full Project →</div>
         </div>
       </a>
@@ -259,7 +265,7 @@ body.nav-open nav{background:var(--navy)}
             <span class="card-year">2026</span>
             <span class="card-status status-complete">v1 Complete</span>
           </div>
-          <h3 class="card-title">Smart Accelerometer Cabinet</h3>
+          <h2 class="card-title">Smart Accelerometer Cabinet</h2>
           <div class="card-role">Sole Developer · Quanta Labs Internship</div>
           <p class="card-desc">A Flask + SQLite inventory dashboard replacing manual sign-out for a lab's fleet of triaxial accelerometers, with a planned RFID-locking cabinet upgrade.</p>
           <div class="card-link">View Full Project →</div>
@@ -276,7 +282,7 @@ body.nav-open nav{background:var(--navy)}
             <span class="card-year">2026</span>
             <span class="card-status status-ongoing">In Progress</span>
           </div>
-          <h3 class="card-title">Golf Practice Net</h3>
+          <h2 class="card-title">Golf Practice Net</h2>
           <div class="card-role">Designer & Builder · Solo Project</div>
           <p class="card-desc">A 10 × 7.5 × 3 ft freestanding golf practice net with a custom PVC frame and 3D-printed ASA structural joints, engineered in CAD for weather and impact resistance.</p>
           <div class="card-link">View Full Project →</div>
@@ -293,7 +299,7 @@ body.nav-open nav{background:var(--navy)}
             <span class="card-year">2026</span>
             <span class="card-status status-ongoing">In Progress</span>
           </div>
-          <h3 class="card-title">Magnetic Fishing Rod Vest Clip</h3>
+          <h2 class="card-title">Magnetic Fishing Rod Vest Clip</h2>
           <div class="card-role">Designer & Builder · Solo Project</div>
           <p class="card-desc">A DIY magnetic quick-release system for attaching a fishing rod to a vest — dual N52 magnets and a spring-finger clamp for a secure, one-handed release.</p>
           <div class="card-link">View Full Project →</div>
@@ -310,7 +316,7 @@ body.nav-open nav{background:var(--navy)}
             <span class="card-year">2026</span>
             <span class="card-status status-complete">Completed</span>
           </div>
-          <h3 class="card-title">Worm Compost Bin Cover</h3>
+          <h2 class="card-title">Worm Compost Bin Cover</h2>
           <div class="card-role">Designer & Builder · Solo Project</div>
           <p class="card-desc">A reverse-engineered replacement tray for a worm composting system, matched to the original's perforation pattern and 3D-printed in ASA.</p>
           <div class="card-link">View Full Project →</div>
@@ -332,7 +338,7 @@ body.nav-open nav{background:var(--navy)}
             <span class="card-year">2025</span>
             <span class="card-status status-complete">Completed</span>
           </div>
-          <h3 class="card-title">Autonomous Maze-Solving Robot</h3>
+          <h2 class="card-title">Autonomous Maze-Solving Robot</h2>
           <div class="card-role">Partner · Minor CAD Contributions</div>
           <p class="card-desc">A tank-drive robot that autonomously maps and solves an unseen maze, built with classmate Kyle Tran — he led the CAD and firmware, I partnered on the build and modeled a few smaller parts while learning CAD from him.</p>
           <div class="card-link">View Full Project →</div>

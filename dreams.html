@@ -25,9 +25,9 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --navy:#faf7f1;--navy-2:#f2ece1;--navy-3:#e9e0cf;
-  --accent:#a8562f;--accent-dim:rgba(168,86,47,0.14);--accent-dim2:rgba(168,86,47,0.07);
-  --white:#2b2620;--white-dim:rgba(43,38,32,0.62);--white-dimmer:rgba(43,38,32,0.56);
-  --border:rgba(43,38,32,0.10);--border-accent:rgba(168,86,47,0.35);
+  --accent:#984e2b;--accent-dim:rgba(152,78,43,0.09);--accent-dim2:rgba(152,78,43,0.07);
+  --white:#2b2620;--white-dim:rgba(43,38,32,0.74);--white-dimmer:rgba(43,38,32,0.68);
+  --border:rgba(43,38,32,0.10);--border-accent:rgba(152,78,43,0.35);
   --serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace;
 }
 html{scroll-behavior:smooth}
@@ -51,7 +51,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .proj-tagline{font-size:1rem;color:var(--white-dim);margin-bottom:2rem;font-weight:300;max-width:600px}
 .proj-badges{display:flex;flex-wrap:wrap;gap:0.6rem}
 .badge{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;padding:0.3rem 0.8rem;border-radius:2px;border:1px solid var(--border-accent);color:var(--accent);background:var(--accent-dim2)}
-.badge-green{border-color:rgba(79,107,63,0.35);color:#4f6b3f;background:rgba(79,107,63,0.14)}
+.badge-green{border-color:rgba(79,107,63,0.35);color:#3f5c31;background:rgba(79,107,63,0.14)}
 
 /* LAYOUT */
 .page-wrap{max-width:1100px;margin:0 auto;padding:0 4rem}
@@ -99,13 +99,33 @@ section.proj-section:last-child{border-bottom:none}
 
 /* PHOTO GALLERY */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:1.5rem;border-radius:4px;overflow:hidden}
-.gallery-item{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer}
-.gallery-item.wide{grid-column:span 2}
-.gallery-item.tall{grid-row:span 2}
-.gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.4s ease;display:block}
+.gallery-item{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in}
+/* wide tiles take their height from the 4:3 tile beside them instead of doubling the row */
+.gallery-item.wide{grid-column:span 2;aspect-ratio:auto}
+.gallery-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.4s ease;display:block}
 .gallery-item:hover img{transform:scale(1.04)}
-.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(43,38,32,0.88));font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:var(--white-dim);opacity:0;transition:opacity 0.3s}
-.gallery-item:hover .gallery-caption{opacity:1}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(43,38,32,0.88));font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;color:rgba(250,247,241,0.95);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.gallery-item:hover .gallery-caption,.gallery-item:focus-within .gallery-caption{opacity:1}
+@media (hover:none) and (min-width:901px){.gallery-caption{opacity:1}}
+@media (hover:none) and (max-width:900px){.gallery-item:first-child .gallery-caption{opacity:1}}
+.gallery-hint{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.06em;color:var(--white-dimmer);margin-top:0.75rem}
+
+/* FIELD TEST VIDEO */
+#video{scroll-margin-top:3rem}
+.video-grid{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:3.5rem;align-items:center}
+.video-frame{margin:0}
+.field-video{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:4px;border:1px solid var(--border);background:var(--navy-3);cursor:pointer}
+.video-frame figcaption{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:0.6rem;font-family:var(--mono);font-size:0.66rem;letter-spacing:0.06em;color:var(--white-dimmer)}
+.video-toggle{font:inherit;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:none;border:1px solid var(--border-accent);border-radius:2px;padding:0.4rem 0.75rem;cursor:pointer}
+.video-toggle:hover{background:var(--accent-dim)}
+.video-copy p{font-size:0.95rem;color:var(--white-dim);line-height:1.85;max-width:560px}
+.video-copy p+p{margin-top:1rem}
+.video-copy strong{color:var(--white);font-weight:500}
+.video-copy code{font-family:var(--mono);font-size:0.84em;background:var(--navy-2);border:1px solid var(--border);border-radius:2px;padding:0.05rem 0.35rem}
+.video-links{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.75rem}
+.video-links a{font-size:0.76rem;padding:0.75rem 1.35rem}
+.video-copy .video-note{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.04em;line-height:1.7;color:var(--white-dimmer);margin-top:1.25rem}
+.meta-list a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--border-accent)}
 
 /* OUTCOME */
 .outcome-body{font-size:0.95rem;color:var(--white-dim);line-height:1.85;max-width:700px}
@@ -140,8 +160,13 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:2rem 4r
   .overview-grid{grid-template-columns:1fr;gap:2rem}
   .tech-grid{grid-template-columns:1fr}
   .safety-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-hero-overlay{background:linear-gradient(to top,var(--navy) 0%,rgba(250,247,241,0.93) 45%,rgba(250,247,241,0.78) 100%)}
   .gallery{grid-template-columns:repeat(2,1fr)}
-  .gallery-item.wide{grid-column:span 1}
+  .gallery-item.wide{grid-column:span 1;aspect-ratio:4/3}
+  .gallery-item:first-child,.gallery-item:last-child{grid-column:span 2}
+  .video-grid{grid-template-columns:1fr;gap:1.75rem}
+  .video-frame{max-width:420px}
+  .gallery-caption{padding:0.5rem 0.6rem;font-size:0.6rem}
   footer{flex-direction:column;gap:0.5rem;padding:1.5rem}
 }
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
@@ -165,6 +190,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 @media (prefers-reduced-motion: reduce){.fade-up{transition:none !important}}
 
 body.nav-open nav{background:var(--navy)}
+
+/* ── image viewer (click any photo to enlarge) ── */
+.page-wrap img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:10000;background:rgba(20,17,14,0.93);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4.5rem 4vw 2rem;cursor:zoom-out}
+.lb[hidden]{display:none}
+.lb-img{max-width:100%;max-height:82vh;object-fit:contain;border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,0.45);cursor:zoom-out}
+.lb-cap{margin-top:1rem;font-family:var(--mono);font-size:0.74rem;letter-spacing:0.05em;color:rgba(250,247,241,0.9);text-align:center;max-width:70ch}
+.lb-close{position:absolute;top:1rem;right:1.25rem;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid rgba(250,247,241,0.45);background:rgba(20,17,14,0.4);color:#faf7f1;font-size:1.4rem;line-height:1;cursor:pointer}
+.lb-close:focus-visible{outline:2px solid #faf7f1;outline-offset:3px}
 </style>
 <noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
@@ -196,7 +230,7 @@ body.nav-open nav{background:var(--navy)}
       <span>D.R.E.A.M.S.</span>
     </div>
     <h1 class="proj-title">D.R.E.A.M.S.<br><em>USV Project</em></h1>
-    <p class="proj-tagline">Data Recovery and Environmental Assessment for Marine Surveillance — a fully autonomous unmanned surface vehicle built in one semester on a £100 budget.</p>
+    <p class="proj-tagline">Data Recovery and Environmental Assessment for Marine Surveillance — a fully autonomous unmanned surface vehicle built with teammate Kyle Tran in one semester on a £100 budget.</p>
     <div class="proj-badges">
       <span class="badge">Autonomous USV</span>
       <span class="badge">Northeastern University</span>
@@ -217,12 +251,39 @@ body.nav-open nav{background:var(--navy)}
     <div class="stat-cell"><span class="num">6+</span><span class="lbl">Safety Systems</span></div>
   </div>
 
+  <!-- FIELD TEST VIDEO -->
+  <section class="proj-section fade-up" id="video">
+    <span class="section-label">01 — Field Test</span>
+    <h2 class="section-title">Planned on a map. Run on the water.</h2>
+    <div class="video-grid">
+      <figure class="video-frame">
+        <video class="field-video" autoplay muted loop playsinline preload="metadata" poster="images/dreams-field-test-poster.jpg" aria-label="Waypoints being placed on a satellite map of St Katharine Docks, followed by D.R.E.A.M.S. moving across the dock water">
+          <source src="videos/dreams-field-test.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <span>13-second clip · no sound</span>
+          <button type="button" class="video-toggle">Pause</button>
+        </figcaption>
+      </figure>
+      <div class="video-copy">
+        <p>Missions start in the project's browser-based <strong>waypoint planner</strong>: waypoints are dropped onto a satellite image of St Katharine Docks and exported as a <code>waypoints.json</code> mission file that the shore station loads. The clip then cuts to D.R.E.A.M.S. on the dock water during testing, run on a safety tether with the handheld RC override on standby.</p>
+        <p>The full video walks through the project's three test subtasks, including the bench tests, the sensor pod, and the waypoint run at the docks.</p>
+        <div class="video-links">
+          <a href="videos/dreams-test-video-full.mp4" target="_blank" rel="noopener" class="btn-primary">▶ Full test video · 2:33</a>
+          <a href="https://github.com/ka1e27/D.R.E.A.M.S-V1" target="_blank" rel="noopener" class="btn-outline">Firmware on GitHub ↗</a>
+          <a href="https://dreamsv1.kylegtran2007.workers.dev/" target="_blank" rel="noopener" class="btn-outline">Waypoint planner ↗</a>
+        </div>
+        <p class="video-note">Firmware co-developed by Kyle Tran and me. The repository and the planner are hosted on Kyle's accounts.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- OVERVIEW -->
   <section class="proj-section fade-up">
-    <span class="section-label">01 — Overview</span>
+    <span class="section-label">02 — Overview</span>
     <div class="overview-grid">
       <div class="overview-body">
-        <p>D.R.E.A.M.S. is a fully autonomous unmanned surface vehicle developed to collect environmental data in degraded aquatic ecosystems. The project was conceived, designed, fabricated, and water-tested within a single semester as a two-person first-year engineering project at Northeastern University's London Scholar Program.</p>
+        <p>D.R.E.A.M.S. is a fully autonomous unmanned surface vehicle developed to collect environmental data in degraded aquatic ecosystems. The project was conceived, designed, fabricated, and water-tested within a single semester by my teammate <strong>Kyle Tran</strong> and me as a two-person first-year engineering project at Northeastern University's London Scholar Program.</p>
         <p>The vessel autonomously navigates to GPS waypoints, lowers a sensor pod on a winch, takes <strong>depth-profiled water readings</strong> every 1m as it descends, confirms bottom contact via a spring-loaded mechanical switch, samples, then raises the pod and moves to the next waypoint. All data is relayed to shore via radio and logged to CSV.</p>
         <p>Every component — from the 3D-printed motor housings and structural reinforcement plates to the sensor pod enclosure and propulsion mounts — was <strong>designed in CAD and fabricated in-house</strong> using the program's makerspace. The entire system was built and tested within a £100 budget.</p>
       </div>
@@ -232,7 +293,7 @@ body.nav-open nav{background:var(--navy)}
           <ul class="meta-list">
             <li>Northeastern University, London</li>
             <li>Spring Semester 2025–2026</li>
-            <li>2-person team</li>
+            <li>2-person team with <a href="https://ka1e27.github.io/Portfolio/" target="_blank" rel="noopener">Kyle Tran ↗</a></li>
             <li>£100 budget</li>
             <li>Water tested at St Katharine Docks</li>
           </ul>
@@ -243,6 +304,7 @@ body.nav-open nav{background:var(--navy)}
             <li>Co-lead & mechanical design</li>
             <li>Structural engineering & fabrication</li>
             <li>CAD modeling (SolidWorks)</li>
+            <li>MicroPython firmware, co-developed with Kyle</li>
             <li>3D printing & prototyping</li>
             <li>External communications & planning</li>
           </ul>
@@ -264,7 +326,7 @@ body.nav-open nav{background:var(--navy)}
 
   <!-- TECHNICAL -->
   <section class="proj-section fade-up">
-    <span class="section-label">02 — Technical Breakdown</span>
+    <span class="section-label">03 — Technical Breakdown</span>
     <h2 class="section-title">Systems & Engineering</h2>
     <div class="tech-grid">
       <div class="tech-card">
@@ -275,6 +337,8 @@ body.nav-open nav{background:var(--navy)}
             <li>Acrylic and 3D-printed structural members</li>
             <li>Custom motor housings for spray protection</li>
             <li>Hull panels painted and sealed for waterproofing</li>
+            <li>Bilateral tolerances on 3D-printed parts for reliable fit</li>
+            <li>Van Veen grab sediment sampler modeled in SolidWorks, delivered with a full engineering drawing package and BOM</li>
           </ul>
         </div>
       </div>
@@ -293,7 +357,7 @@ body.nav-open nav{background:var(--navy)}
       <div class="tech-card">
         <div class="tech-card-title">Electronics & Computing</div>
         <div class="tech-card-body">
-          <p>Three Raspberry Pi Picos running MicroPython with uasyncio manage the full system — the Boat Pico handles propulsion, GPS waypoint navigation (NEO-6M, haversine), compass (QMC5883P), winch control, and RC override. The Pod Pico runs the underwater sensor suite. The Shore Pico serves as the operator station, logging three CSVs and issuing commands. All communicate via <strong>HC-12 433MHz radio verified at 1,000 meters</strong>.</p>
+          <p>Three Raspberry Pi Picos running MicroPython with uasyncio manage the full system — the Boat Pico handles propulsion, GPS waypoint navigation (NEO-6M, haversine), compass (QMC5883P), winch control, and RC override. The Pod Pico runs the underwater sensor suite. The Shore Pico serves as the operator station, logging three CSVs and issuing commands. All communicate via <strong>HC-12 433MHz radio verified at 1,000 meters</strong>. Kyle and I wrote the firmware together (<a href="https://github.com/ka1e27/D.R.E.A.M.S-V1" target="_blank" rel="noopener" style="color:var(--accent)">source on GitHub ↗</a>).</p>
           <ul>
             <li>3× Raspberry Pi Pico MCUs (boat, sensor pod, shore)</li>
             <li>HC-12 433MHz bidirectional radio, 1km verified range</li>
@@ -321,37 +385,37 @@ body.nav-open nav{background:var(--navy)}
 
   <!-- SAFETY -->
   <section class="proj-section fade-up">
-    <span class="section-label">03 — Safety Architecture</span>
+    <span class="section-label">04 — Safety Architecture</span>
     <h2 class="section-title">Fault-Tolerant Systems</h2>
     <p style="font-size:0.9rem;color:var(--white-dim);max-width:650px;margin-bottom:0.5rem;">The safety architecture implements per-sensor watchdog monitoring with quality flags on every telemetry frame, fault thresholds with safe-stop on critical failures, and SAFETY_OFF overrides requiring explicit confirmation for battery and hull sensors — modeled on the fail-safe patterns used on professional maritime platforms.</p>
     <div class="safety-grid">
       <div class="safety-item">
-        <span class="safety-icon">💧</span>
+        <span class="safety-icon" aria-hidden="true">💧</span>
         <div class="safety-name">Water Ingress Detection</div>
         <div class="safety-desc">Open circuit sensor triggers alert if water enters the hull, enabling early detection before critical damage occurs.</div>
       </div>
       <div class="safety-item">
-        <span class="safety-icon">🌡</span>
+        <span class="safety-icon" aria-hidden="true">🌡</span>
         <div class="safety-name">Motor Thermistors</div>
         <div class="safety-desc">Thermistors positioned at each motor continuously monitor heat levels and flag overtemperature conditions.</div>
       </div>
       <div class="safety-item">
-        <span class="safety-icon">🔋</span>
+        <span class="safety-icon" aria-hidden="true">🔋</span>
         <div class="safety-name">Battery Monitoring</div>
         <div class="safety-desc">Real-time battery percentage tracking with progressive low-power warnings transmitted to shore side.</div>
       </div>
       <div class="safety-item">
-        <span class="safety-icon">📡</span>
+        <span class="safety-icon" aria-hidden="true">📡</span>
         <div class="safety-name">Loss-of-Signal Auto-Return</div>
         <div class="safety-desc">If communication with shore is lost beyond a set time threshold, the vessel autonomously returns to its launch point.</div>
       </div>
       <div class="safety-item">
-        <span class="safety-icon">🆘</span>
+        <span class="safety-icon" aria-hidden="true">🆘</span>
         <div class="safety-name">SOS Signal</div>
         <div class="safety-desc">Critical fault conditions trigger an SOS transmission to the shore-side operator for immediate intervention.</div>
       </div>
       <div class="safety-item">
-        <span class="safety-icon">⚙️</span>
+        <span class="safety-icon" aria-hidden="true">⚙️</span>
         <div class="safety-name">Fault-Tolerant Mission Continue</div>
         <div class="safety-desc">Non-critical system failures are reported to shore but do not abort the mission — the vessel continues autonomously.</div>
       </div>
@@ -361,51 +425,64 @@ body.nav-open nav{background:var(--navy)}
 
   <!-- GALLERY -->
   <section class="proj-section fade-up">
-    <span class="section-label">04 — Build & Test Gallery</span>
+    <span class="section-label">05 — Build & Test Gallery</span>
     <h2 class="section-title">From Makerspace to Water</h2>
     <div class="gallery">
       <div class="gallery-item wide">
-        <img src="images/dreams-st-katharine-docks.jpg" alt="DREAMS at St Katharine Docks" loading="lazy">
+        <img src="images/dreams-st-katharine-docks.jpg" alt="D.R.E.A.M.S. on the dockside before launch at St Katharine Docks, London" loading="lazy">
         <div class="gallery-caption">Pre-launch at St Katharine Docks, London</div>
       </div>
       <div class="gallery-item">
-        <img src="images/dreams-top-down-assembled.jpg" alt="Top down view of assembled boat" loading="lazy">
-        <div class="gallery-caption">Full assembly — top down view</div>
+        <img src="images/dreams-on-the-water.jpg" alt="D.R.E.A.M.S. floating on the water at St Katharine Docks, seen from above, with its blue safety tether" loading="lazy" style="object-position:50% 64%">
+        <div class="gallery-caption">On the water at St Katharine Docks (safety tether attached)</div>
       </div>
       <div class="gallery-item">
-        <img src="images/dreams-on-the-water.jpg" alt="DREAMS on the water" loading="lazy">
-        <div class="gallery-caption">Water testing in progress</div>
+        <img src="images/dreams-cad-sketch.jpg" alt="Fully defined SolidWorks sketch with dimensions in millimetres" loading="lazy">
+        <div class="gallery-caption">SolidWorks sketch, fully defined, dimensioned in mm</div>
       </div>
       <div class="gallery-item">
-        <img src="images/dreams-winch-sensor-pod.jpg" alt="Winch and sensor pod mechanism" loading="lazy">
+        <img src="images/dreams-hull-painting.jpg" alt="Painted red and black hull panels hung to dry over a drop cloth" loading="lazy">
+        <div class="gallery-caption">Hull panels drying after painting &amp; sealing</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/dreams-assembled-front.jpg" alt="Fully assembled catamaran on a desk, showing the winch spool and belt-driven propulsion pods" loading="lazy">
+        <div class="gallery-caption">Assembled: winch spool &amp; belt-driven propulsion pods</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/dreams-winch-sensor-pod.jpg" alt="Winch spool and drive gear for lowering the sensor pod" loading="lazy">
         <div class="gallery-caption">Sensor winch mechanism detail</div>
       </div>
       <div class="gallery-item">
-        <img src="images/dreams-motor-propulsion.jpg" alt="Motor and propulsion unit" loading="lazy">
-        <div class="gallery-caption">Motor housing & propulsion unit</div>
+        <img src="images/dreams-motor-propulsion.jpg" alt="3D-printed motor housing and propulsion unit" loading="lazy">
+        <div class="gallery-caption">Motor housing &amp; propulsion unit</div>
       </div>
       <div class="gallery-item">
-        <img src="images/dreams-wired-makerspace.jpg" alt="Holding the wired boat in makerspace" loading="lazy">
+        <img src="images/dreams-wired-makerspace.jpg" alt="Holding the fully wired boat in the makerspace" loading="lazy">
         <div class="gallery-caption">Fully wired — makerspace build session</div>
       </div>
       <div class="gallery-item wide">
-        <img src="images/dreams-field-debugging.jpg" alt="Field debugging session" loading="lazy">
+        <img src="images/dreams-field-debugging.jpg" alt="Debugging the boat on a laptop before a field test" loading="lazy">
         <div class="gallery-caption">Field debugging session pre-test</div>
       </div>
       <div class="gallery-item">
-        <img src="images/dreams-final-presentation.jpg" alt="Team with boat at final presentation" loading="lazy">
-        <div class="gallery-caption">Final presentation — Northeastern London</div>
+        <img src="images/dreams-top-down-assembled.jpg" alt="Top-down view of the assembled boat" loading="lazy">
+        <div class="gallery-caption">Full assembly — top down view</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/dreams-final-presentation.jpg" alt="Kyle Tran and Matthew Hong holding D.R.E.A.M.S. at the final presentation" loading="lazy">
+        <div class="gallery-caption">Kyle Tran (left) and me (right) at the final presentation, Northeastern London</div>
       </div>
       <div class="gallery-item wide">
-        <img src="images/dreams-showcase-faculty.jpg" alt="DREAMS showcase — explaining project to faculty" loading="lazy">
-        <div class="gallery-caption">Project showcase — presenting to Northeastern faculty and staff</div>
+        <img src="images/dreams-showcase-faculty.jpg" alt="Matthew Hong and Kyle Tran presenting D.R.E.A.M.S. to Northeastern faculty and staff at the project showcase" loading="lazy">
+        <div class="gallery-caption">Presenting D.R.E.A.M.S. with Kyle Tran to Northeastern faculty and staff</div>
       </div>
     </div>
+    <p class="gallery-hint">Click or tap any photo to view it full size.</p>
   </section>
 
   <!-- OUTCOME -->
   <section class="proj-section fade-up">
-    <span class="section-label">05 — Outcome</span>
+    <span class="section-label">06 — Outcome</span>
     <h2 class="section-title">Results & Next Steps</h2>
     <div class="outcome-body">
       <p>The vessel was <strong>successfully water-tested at St Katharine Docks, London</strong> — a marina adjacent to campus — following a formal access request process negotiated directly with dock management. The autonomous navigation, wireless communication, and sensor systems all performed as designed during field testing.</p>
@@ -422,6 +499,7 @@ body.nav-open nav{background:var(--navy)}
     <div class="cta-row">
       <a href="projects.html" class="btn-outline">← All Projects</a>
       <a href="index.html#contact" class="btn-primary">Get in Touch ↗</a>
+      <a href="quanta-labs.html" class="btn-outline">Next: Smart Accelerometer Cabinet →</a>
     </div>
   </section>
 
@@ -457,6 +535,49 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       }
     });
   });
+})();
+</script>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <button class="lb-close" type="button" aria-label="Close image">&times;</button>
+  <img class="lb-img" alt="">
+  <p class="lb-cap"></p>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var big=lb.querySelector('.lb-img'), cap=lb.querySelector('.lb-cap'), btn=lb.querySelector('.lb-close'), last=null;
+  function captionFor(img){
+    var n=img.nextElementSibling;
+    if(n && /(^|\s)(img-caption|gallery-caption)(\s|$)/.test(n.className)) return n.textContent.trim();
+    var c=img.parentElement.querySelector('.gallery-caption,.img-caption');
+    return c ? c.textContent.trim() : (img.alt||'');
+  }
+  function open(img){
+    last=img; big.src=img.currentSrc||img.src; big.alt=img.alt||''; cap.textContent=captionFor(img);
+    lb.hidden=false; document.body.style.overflow='hidden'; btn.focus();
+  }
+  function close(){
+    lb.hidden=true; big.removeAttribute('src'); document.body.style.overflow=''; if(last) last.focus();
+  }
+  document.querySelectorAll('.page-wrap img').forEach(function(img){
+    img.setAttribute('tabindex','0'); img.setAttribute('role','button');
+    img.setAttribute('aria-label','Enlarge image: '+(img.alt||'photo'));
+    img.addEventListener('click',function(){ open(img); });
+    img.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(img); } });
+  });
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !lb.hidden) close(); });
+})();
+</script>
+<script>
+(function(){
+  var v=document.querySelector('.field-video'), b=document.querySelector('.video-toggle');
+  if(!v||!b) return;
+  function sync(){ b.textContent = v.paused ? 'Play' : 'Pause'; }
+  function toggle(){ if(v.paused){ v.play(); } else { v.pause(); } }
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ v.removeAttribute('autoplay'); v.pause(); }
+  b.addEventListener('click',toggle); v.addEventListener('click',toggle);
+  v.addEventListener('play',sync); v.addEventListener('pause',sync); sync();
 })();
 </script>
 </body>

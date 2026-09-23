@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Matthew Hong</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf7f1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#faf7f1;--navy-2:#f2ece1;--accent:#984e2b;--accent-dim:rgba(152,78,43,0.09);--white:#2b2620;--white-dim:rgba(43,38,32,0.74);--border-accent:rgba(152,78,43,0.35);--serif:'DM Serif Display',serif;--sans:'Outfit',sans-serif;--mono:'DM Mono',monospace}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);color:var(--white);font-family:var(--sans);line-height:1.7;padding:2rem}
+main{max-width:560px}
+.label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.08;margin-bottom:1rem}
+h1 em{color:var(--accent)}
+p{color:var(--white-dim);margin-bottom:2rem}
+.links{display:flex;gap:1rem;flex-wrap:wrap}
+a{display:inline-block;font-weight:500;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.85rem 1.75rem;border-radius:2px;text-decoration:none;border:1px solid var(--border-accent);color:var(--accent);transition:background 0.2s}
+a:hover{background:var(--accent-dim)}
+a.primary{background:var(--accent);color:var(--navy);border-color:var(--accent);font-weight:600}
+a.primary:hover{opacity:0.88;background:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <div class="label">404 — Page not found</div>
+  <h1>This page doesn't exist <em>(yet).</em></h1>
+  <p>The link may be out of date. Everything is still here: my projects, experience, and résumé are one click away.</p>
+  <div class="links">
+    <a class="primary" href="/">Go to Portfolio</a>
+    <a href="/projects.html">All Projects</a>
+    <a href="/resume.html">Résumé</a>
+  </div>
+</main>
+</body>
+</html>

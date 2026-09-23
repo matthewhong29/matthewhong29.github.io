@@ -14,11 +14,14 @@
 <meta property="og:title" content="Résumé — Matthew Hong">
 <meta property="og:description" content="Résumé of Matthew Hong, Mechanical Engineering student at Northeastern University with shock-and-vibration test engineering internship experience.">
 <meta property="og:url" content="https://matthewhong29.github.io/resume.html">
-<meta property="og:image" content="https://matthewhong29.github.io/images/matthew-headshot.jpg">
+<meta property="og:image" content="https://matthewhong29.github.io/images/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Matthew Hong, Mechanical Engineering, Northeastern '29, with the D.R.E.A.M.S. autonomous boat at St Katharine Docks">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Résumé — Matthew Hong">
 <meta name="twitter:description" content="Résumé of Matthew Hong, Mechanical Engineering student at Northeastern University with shock-and-vibration test engineering internship experience.">
-<meta name="twitter:image" content="https://matthewhong29.github.io/images/matthew-headshot.jpg">
+<meta name="twitter:image" content="https://matthewhong29.github.io/images/og-card.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -28,14 +31,14 @@
     --navy: #faf7f1;
     --navy-2: #f2ece1;
     --navy-3: #e9e0cf;
-    --accent: #a8562f;
-    --accent-dim: rgba(168,86,47,0.14);
-    --accent-dim2: rgba(168,86,47,0.07);
+    --accent: #984e2b;
+    --accent-dim: rgba(152,78,43,0.09);
+    --accent-dim2: rgba(152,78,43,0.07);
     --white: #2b2620;
-    --white-dim: rgba(43,38,32,0.62);
-    --white-dimmer: rgba(43,38,32,0.56);
+    --white-dim: rgba(43,38,32,0.74);
+    --white-dimmer: rgba(43,38,32,0.68);
     --border: rgba(43,38,32,0.10);
-    --border-accent: rgba(168,86,47,0.35);
+    --border-accent: rgba(152,78,43,0.35);
     --serif: 'DM Serif Display', serif;
     --sans: 'Outfit', sans-serif;
     --mono: 'DM Mono', monospace;
@@ -327,6 +330,14 @@
     .pdf-embed-wrap { height: 60vh; min-height: 400px; }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
   }
+  /* phones: embedded PDFs are unreadable (and unsupported on Android), so offer open/download instead */
+  @media (max-width: 640px) {
+    .pdf-embed-wrap { height: auto; min-height: 0; }
+    .pdf-embed-wrap iframe { display: none; }
+    .pdf-fallback { display: flex; min-height: 0; padding: 2.5rem 1.5rem; }
+    .pdf-toolbar-right { display: none; }
+  }
+  .pdf-fallback-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
 body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(43,38,32,0.035) 1px,transparent 0);background-size:3px 3px}
 /* ── responsive nav + focus states (added) ── */
 .nav-toggle{display:none;background:none;border:1px solid var(--border-accent);border-radius:3px;padding:0.4rem 0.55rem;cursor:pointer;line-height:0}
@@ -372,7 +383,7 @@ body.nav-open nav{background:var(--navy)}
 
   <div class="page-header">
     <div class="page-header-left">
-      <span class="section-label">Curriculum Vitae</span>
+      <span class="section-label">Résumé</span>
       <h1 class="page-title">Matthew <em>Hong</em></h1>
       <p class="page-subtitle">Mechanical Engineering · Northeastern University · Class of 2029</p>
     </div>
@@ -405,8 +416,11 @@ body.nav-open nav{background:var(--navy)}
       ></iframe>
       <div class="pdf-fallback" id="pdfFallback">
         <div class="pdf-fallback-icon">⬡</div>
-        <p>PDF preview unavailable in this browser. Use the download button above to view the full resume.</p>
-        <a href="resume.pdf" download="Matthew_Hong_Resume.pdf" class="btn-primary">↓ Download Resume</a>
+        <p>Open the one-page résumé in your browser's PDF viewer, or download a copy.</p>
+        <div class="pdf-fallback-actions">
+          <a href="resume.pdf" target="_blank" rel="noopener" class="btn-primary">Open PDF ↗</a>
+          <a href="resume.pdf" download="Matthew_Hong_Resume.pdf" class="btn-outline">↓ Download</a>
+        </div>
       </div>
     </div>
   </div>
