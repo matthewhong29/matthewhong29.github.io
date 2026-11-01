@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Golf Shot Tracker</title>
+<meta name="description" content="Log golf shots club by club and compare each one to typical amateur numbers.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf7f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Shot Tracker">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#faf7f1;--bg-2:#f2ece1;--bg-3:#e9e0cf;
+  --ink:#2b2620;--ink-dim:rgba(43,38,32,.72);--ink-faint:rgba(43,38,32,.5);
+  --accent:#984e2b;--accent-dim:rgba(152,78,43,.1);
+  --good:#3f6b31;--bad:#a8402a;
+  --border:rgba(43,38,32,.12);
+  --fairway:#dfe8d2;--rough:#cbd8b8;
+  --serif:'DM Serif Display',serif;--sans:'Outfit',system-ui,sans-serif;--mono:'DM Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1c1915;--bg-2:#25211c;--bg-3:#302a23;
+    --ink:#f1ebe0;--ink-dim:rgba(241,235,224,.74);--ink-faint:rgba(241,235,224,.5);
+    --accent:#e08a5c;--accent-dim:rgba(224,138,92,.14);
+    --good:#8cc47a;--bad:#ef8a72;
+    --border:rgba(241,235,224,.13);
+    --fairway:#2c3a26;--rough:#24301f;
+  }
+}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;min-height:100vh;padding-bottom:calc(5rem + env(safe-area-inset-bottom))}
+header{padding:1.25rem 16px .75rem;max-width:760px;margin:0 auto;display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+h1{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1}
+h1 em{color:var(--accent);font-style:normal}
+.who{font-family:var(--mono);font-size:.75rem;color:var(--ink-faint);text-align:right}
+main{max-width:760px;margin:0 auto;padding:0 16px}
+section.view{display:none}
+section.view.active{display:block}
+h2{font-family:var(--serif);font-weight:400;font-size:1.3rem;margin:1.25rem 0 .6rem}
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1rem}
+label{display:block;font-size:.8rem;font-weight:500;color:var(--ink-dim);margin-bottom:.3rem}
+input,select,textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.65rem .7rem;min-height:44px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.field{margin-bottom:.75rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font:inherit;font-size:.9rem;padding:.5rem .8rem;min-height:40px;border-radius:999px;border:1px solid var(--border);background:var(--bg);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.lr{display:grid;grid-template-columns:auto 1fr auto;gap:.5rem;align-items:center}
+.lr button{min-width:56px}
+button.btn{font:inherit;font-weight:600;font-size:1rem;padding:.8rem 1.1rem;min-height:48px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;width:100%}
+button.btn.ghost{background:transparent;color:var(--accent)}
+button.btn.small{width:auto;font-size:.85rem;padding:.5rem .8rem;min-height:40px}
+details summary{cursor:pointer;font-size:.9rem;color:var(--accent);font-weight:500;padding:.4rem 0;min-height:40px;display:flex;align-items:center}
+.hint{font-size:.8rem;color:var(--ink-faint);margin-top:.25rem}
+.compare{font-family:var(--mono);font-size:.85rem;margin-top:.75rem;padding:.6rem .7rem;border-radius:8px;background:var(--accent-dim);min-height:2.4rem}
+.up{color:var(--good)}.down{color:var(--bad)}
+.toast{position:fixed;left:50%;bottom:calc(5.5rem + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:.6rem 1rem;border-radius:8px;font-size:.9rem;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--bg-2);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom);z-index:40}
+nav.tabs button{font:inherit;font-size:.78rem;font-weight:500;background:none;border:0;color:var(--ink-faint);padding:.55rem 0 .65rem;min-height:56px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.15rem}
+nav.tabs button svg{width:22px;height:22px}
+nav.tabs button[aria-selected="true"]{color:var(--accent)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+table{width:100%;border-collapse:collapse;font-size:.85rem;font-variant-numeric:tabular-nums}
+th,td{padding:.5rem .45rem;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--ink-faint);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+td input{min-height:36px;padding:.35rem .4rem;font-size:.9rem;width:4.6rem;text-align:right}
+.empty{color:var(--ink-faint);font-size:.9rem;padding:1rem 0;text-align:center}
+.shot{display:grid;grid-template-columns:1fr auto;gap:.25rem .75rem;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.shot:last-child{border-bottom:0}
+.shot .main{font-weight:500}
+.shot .meta{font-size:.78rem;color:var(--ink-faint);grid-column:1}
+.shot .del{grid-row:1/3;grid-column:2;align-self:center;font:inherit;background:none;border:0;color:var(--ink-faint);font-size:1.3rem;min-width:44px;min-height:44px;cursor:pointer}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.55rem .6rem}
+.stat .k{font-size:.7rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em}
+.stat .v{font-family:var(--mono);font-size:1.15rem}
+.stat .d{font-family:var(--mono);font-size:.75rem}
+svg.chart{width:100%;height:auto;display:block}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.78rem;color:var(--ink-dim);margin-top:.4rem}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.35rem;vertical-align:-1px}
+.row-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+@media (max-width:420px){.grid3{grid-template-columns:1fr 1fr}.stat .v{font-size:1rem}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Shot <em>Tracker</em></h1>
+  <div class="who" id="who"></div>
+</header>
+
+<main>
+<!-- LOG -->
+<section class="view active" id="view-log" aria-label="Log a shot">
+  <div class="card">
+    <div class="field">
+      <label>Club</label>
+      <div class="chips" id="clubChips"></div>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label for="carry">Carry (yds)</label>
+        <input id="carry" type="number" inputmode="decimal" min="0" max="400" placeholder="e.g. 135">
+      </div>
+      <div class="field">
+        <label for="total">Total (yds) <span style="color:var(--ink-faint)">optional</span></label>
+        <input id="total" type="number" inputmode="decimal" min="0" max="450" placeholder="with roll">
+      </div>
+    </div>
+    <div class="field">
+      <label for="offline">Offline (yds from target line)</label>
+      <div class="lr">
+        <button type="button" class="chip" id="dirL" aria-pressed="false">Left</button>
+        <input id="offline" type="number" inputmode="decimal" min="0" max="100" placeholder="0 = on line">
+        <button type="button" class="chip" id="dirR" aria-pressed="false">Right</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Shape / result</label>
+      <div class="chips" id="shapeChips"></div>
+    </div>
+    <details>
+      <summary>Launch monitor numbers (if you have them)</summary>
+      <div class="grid3" style="margin-top:.5rem">
+        <div class="field"><label for="clubSpeed">Club speed (mph)</label><input id="clubSpeed" type="number" inputmode="decimal"></div>
+        <div class="field"><label for="ballSpeed">Ball speed (mph)</label><input id="ballSpeed" type="number" inputmode="decimal"></div>
+        <div class="field"><label for="launch">Launch (°)</label><input id="launch" type="number" inputmode="decimal"></div>
+        <div class="field"><label for="spin">Spin (rpm)</label><input id="spin" type="number" inputmode="numeric"></div>
+      </div>
+    </details>
+    <div class="field">
+      <label for="note">Note</label>
+      <input id="note" type="text" placeholder="e.g. felt good, ball above feet">
+    </div>
+    <button class="btn" id="saveShot">Save shot</button>
+    <div class="compare" id="liveCompare">Pick a club and enter carry to compare.</div>
+  </div>
+
+  <h2>Today</h2>
+  <div class="card" id="todayList"></div>
+</section>
+
+<!-- STATS -->
+<section class="view" id="view-stats" aria-label="Stats">
+  <h2>His bag vs. typical</h2>
+  <div class="card">
+    <div class="table-wrap"><table id="bagTable"></table></div>
+    <p class="hint">“Typical” is the baseline on the Settings tab. Δ is his average carry minus that baseline. ± is how much his carry varies shot to shot (standard deviation); smaller means more consistent.</p>
+  </div>
+
+  <h2>Gapping</h2>
+  <div class="card">
+    <svg class="chart" id="gapChart" role="img" aria-label="Average carry per club versus typical"></svg>
+    <div class="legend"><span><i style="background:var(--accent)"></i>His average carry</span><span><i style="background:var(--ink-faint)"></i>Typical</span></div>
+  </div>
+
+  <h2>Dispersion</h2>
+  <div class="card">
+    <div class="field" style="max-width:220px"><label for="dispClub">Club</label><select id="dispClub"></select></div>
+    <div class="stat-row" id="dispStats"></div>
+    <svg class="chart" id="dispChart" role="img" aria-label="Shot landing pattern for the selected club"></svg>
+    <div class="legend"><span><i style="background:var(--accent)"></i>Shot</span><span><i style="background:transparent;border:2px dashed var(--ink-faint)"></i>Typical carry</span></div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="view" id="view-history" aria-label="History">
+  <h2>All shots</h2>
+  <div class="field" style="max-width:220px"><label for="histClub">Filter by club</label><select id="histClub"></select></div>
+  <div class="card" id="histList"></div>
+</section>
+
+<!-- SETTINGS -->
+<section class="view" id="view-settings" aria-label="Settings">
+  <h2>Player</h2>
+  <div class="card">
+    <div class="grid2">
+      <div class="field"><label for="pName">Name</label><input id="pName" type="text" placeholder="Dad"></div>
+      <div class="field"><label for="pHcp">Handicap</label><input id="pHcp" type="number" inputmode="decimal" placeholder="e.g. 15"></div>
+    </div>
+  </div>
+
+  <h2>Baseline (“typical”) numbers</h2>
+  <div class="card">
+    <p class="hint" style="margin:0 0 .75rem">These start as rough averages for a mid-handicap male amateur in his 50s–60s. Replace them with his own numbers from a fitting or launch monitor session whenever you have them. Untick a club he doesn't carry.</p>
+    <div class="table-wrap"><table id="baseTable"></table></div>
+    <div class="row-actions" style="margin-top:.75rem">
+      <button class="btn small ghost" id="resetBase">Reset to defaults</button>
+    </div>
+  </div>
+
+  <h2>Data</h2>
+  <div class="card">
+    <p class="hint" style="margin:0 0 .75rem">Shots are saved on this device only. Export a backup now and then.</p>
+    <div class="row-actions">
+      <button class="btn small" id="exportCsv">Export CSV</button>
+      <button class="btn small" id="exportJson">Backup (JSON)</button>
+      <button class="btn small ghost" id="importBtn">Restore backup</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+      <button class="btn small ghost" id="clearAll" style="border-color:var(--bad);color:var(--bad)">Delete all shots</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Log</button>
+  <button role="tab" aria-selected="false" data-view="stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Stats</button>
+  <button role="tab" aria-selected="false" data-view="history"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>History</button>
+  <button role="tab" aria-selected="false" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings</button>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+
+// ---- Default "typical" baseline -------------------------------------------
+// Rough averages for a mid-handicap (~15) male amateur, age 50s-60s.
+// They're a starting point only: swap in real numbers on the Settings tab.
+const DEFAULT_BASELINE = [
+  // club,  carry, clubSpeed, ballSpeed, launch, spin
+  ['Driver', 205, 92, 131, 12.5, 3300],
+  ['3W',     185, 87, 123, 11.5, 3900],
+  ['5W',     172, 84, 117, 12.5, 4400],
+  ['Hybrid', 165, 81, 113, 13.0, 4600],
+  ['5i',     155, 78, 107, 14.0, 5000],
+  ['6i',     145, 76, 103, 15.5, 5500],
+  ['7i',     135, 74,  99, 17.0, 6200],
+  ['8i',     125, 72,  94, 19.0, 7000],
+  ['9i',     115, 70,  89, 21.0, 7800],
+  ['PW',     105, 68,  84, 24.0, 8500],
+  ['GW',      90, 66,  77, 27.0, 9000],
+  ['SW',      75, 64,  70, 30.0, 9500],
+].map(([club, carry, clubSpeed, ballSpeed, launch, spin]) =>
+  ({ club, carry, clubSpeed, ballSpeed, launch, spin, inBag: true }));
+
+const SHAPES = ['Straight', 'Draw', 'Fade', 'Hook', 'Slice', 'Push', 'Pull', 'Thin', 'Fat'];
+const KEY = 'golfShotTracker.v1';
+
+// ---- Storage ---------------------------------------------------------------
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (d && Array.isArray(d.shots) && Array.isArray(d.baseline)) return d;
+    }
+  } catch (e) { /* storage blocked or corrupt; fall through */ }
+  return { player: { name: '', hcp: '' }, baseline: structuredClone(DEFAULT_BASELINE), shots: [] };
+}
+let state = load();
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); }
+  catch (e) { toast('Could not save on this device. Export a backup!'); }
+}
+
+// ---- Helpers ---------------------------------------------------------------
+const $ = (s) => document.querySelector(s);
+const num = (v) => { const n = parseFloat(v); return Number.isFinite(n) ? n : null; };
+const mean = (a) => a.length ? a.reduce((s, x) => s + x, 0) / a.length : null;
+const sd = (a) => { if (a.length < 2) return null; const m = mean(a); return Math.sqrt(a.reduce((s, x) => s + (x - m) ** 2, 0) / (a.length - 1)); };
+const fmt = (v, d = 0) => v == null ? '–' : v.toFixed(d);
+const signed = (v, d = 0) => v == null ? '–' : (v > 0 ? '+' : v < 0 ? '−' : '±') + Math.abs(v).toFixed(d);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const baseFor = (club) => state.baseline.find((b) => b.club === club);
+const bagClubs = () => state.baseline.filter((b) => b.inBag).map((b) => b.club);
+const lrText = (o) => o == null ? '' : o === 0 ? 'on line' : `${Math.abs(o)} ${o < 0 ? 'L' : 'R'}`;
+const dayKey = (t) => new Date(t).toLocaleDateString();
+let toastTimer;
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ---- Log form --------------------------------------------------------------
+let selClub = null, selShape = null, dir = null;
+
+function renderClubChips() {
+  const clubs = bagClubs();
+  if (!clubs.includes(selClub)) selClub = clubs.includes('7i') ? '7i' : clubs[0] || null;
+  $('#clubChips').innerHTML = clubs.map((c) =>
+    `<button type="button" class="chip" data-club="${esc(c)}" aria-pressed="${c === selClub}">${esc(c)}</button>`).join('');
+}
+$('#clubChips').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-club]'); if (!b) return;
+  selClub = b.dataset.club; renderClubChips(); updateCompare();
+});
+
+$('#shapeChips').innerHTML = SHAPES.map((s) => `<button type="button" class="chip" data-shape="${s}" aria-pressed="false">${s}</button>`).join('');
+$('#shapeChips').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-shape]'); if (!b) return;
+  selShape = selShape === b.dataset.shape ? null : b.dataset.shape;
+  document.querySelectorAll('[data-shape]').forEach((x) => x.setAttribute('aria-pressed', x.dataset.shape === selShape));
+});
+
+function setDir(d) {
+  dir = dir === d ? null : d;
+  $('#dirL').setAttribute('aria-pressed', dir === 'L');
+  $('#dirR').setAttribute('aria-pressed', dir === 'R');
+}
+$('#dirL').addEventListener('click', () => setDir('L'));
+$('#dirR').addEventListener('click', () => setDir('R'));
+
+function updateCompare() {
+  const carry = num($('#carry').value);
+  const b = selClub && baseFor(selClub);
+  const el = $('#liveCompare');
+  if (!b || carry == null) { el.textContent = selClub && b ? `Typical ${selClub} carry: ${b.carry} yds` : 'Pick a club and enter carry to compare.'; return; }
+  const d = carry - b.carry;
+  const his = mean(state.shots.filter((s) => s.club === selClub).map((s) => s.carry));
+  el.innerHTML = `${esc(selClub)}: <b>${carry}</b> yds · typical ${b.carry} <span class="${d >= 0 ? 'up' : 'down'}">(${signed(d)})</span>` +
+    (his != null ? ` · his avg ${fmt(his)}` : '');
+}
+$('#carry').addEventListener('input', updateCompare);
+
+$('#saveShot').addEventListener('click', () => {
+  const carry = num($('#carry').value);
+  if (!selClub) return toast('Pick a club first');
+  if (carry == null || carry <= 0) { $('#carry').focus(); return toast('Enter the carry distance'); }
+  let off = num($('#offline').value);
+  if (off != null) { off = Math.abs(off); if (off !== 0 && !dir) return toast('Tap Left or Right for the miss'); if (dir === 'L') off = -off; }
+  state.shots.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    t: Date.now(), club: selClub, carry,
+    total: num($('#total').value), offline: off, shape: selShape,
+    clubSpeed: num($('#clubSpeed').value), ballSpeed: num($('#ballSpeed').value),
+    launch: num($('#launch').value), spin: num($('#spin').value),
+    note: $('#note').value.trim(),
+  });
+  save();
+  ['#carry', '#total', '#offline', '#clubSpeed', '#ballSpeed', '#launch', '#spin', '#note'].forEach((s) => $(s).value = '');
+  dir = null; $('#dirL').setAttribute('aria-pressed', 'false'); $('#dirR').setAttribute('aria-pressed', 'false');
+  selShape = null; document.querySelectorAll('[data-shape]').forEach((x) => x.setAttribute('aria-pressed', 'false'));
+  toast(`${selClub} · ${carry} yds saved`);
+  updateCompare(); renderAll();
+  $('#carry').focus();
+});
+
+// ---- Shot lists ------------------------------------------------------------
+function shotRow(s) {
+  const b = baseFor(s.club);
+  const d = b ? s.carry - b.carry : null;
+  const bits = [lrText(s.offline), s.shape, s.total != null ? `total ${s.total}` : '',
+    s.clubSpeed != null ? `${s.clubSpeed} mph club` : '', s.ballSpeed != null ? `${s.ballSpeed} mph ball` : '',
+    s.launch != null ? `${s.launch}°` : '', s.spin != null ? `${s.spin} rpm` : ''].filter(Boolean);
+  const when = new Date(s.t).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  return `<div class="shot">
+    <div class="main">${esc(s.club)} · ${s.carry} yds ${d != null ? `<span class="${d >= 0 ? 'up' : 'down'}" style="font-family:var(--mono);font-size:.8rem">${signed(d)}</span>` : ''}</div>
+    <div class="meta">${esc([when, ...bits].join(' · '))}${s.note ? ` — ${esc(s.note)}` : ''}</div>
+    <button class="del" data-del="${s.id}" aria-label="Delete shot">×</button></div>`;
+}
+function renderToday() {
+  const today = dayKey(Date.now());
+  const list = state.shots.filter((s) => dayKey(s.t) === today).slice().reverse();
+  $('#todayList').innerHTML = list.length ? list.map(shotRow).join('') : '<div class="empty">No shots yet today.</div>';
+}
+function renderHistory() {
+  const f = $('#histClub').value;
+  const list = state.shots.filter((s) => !f || s.club === f).slice().reverse();
+  $('#histList').innerHTML = list.length ? list.map(shotRow).join('') : '<div class="empty">No shots logged.</div>';
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  if (!confirm('Delete this shot?')) return;
+  state.shots = state.shots.filter((s) => s.id !== b.dataset.del);
+  save(); renderAll(); toast('Shot deleted');
+});
+
+// ---- Stats -----------------------------------------------------------------
+function clubStats(club) {
+  const ss = state.shots.filter((s) => s.club === club);
+  const carries = ss.map((s) => s.carry);
+  const offs = ss.map((s) => s.offline).filter((v) => v != null);
+  const smash = ss.filter((s) => s.clubSpeed && s.ballSpeed).map((s) => s.ballSpeed / s.clubSpeed);
+  return {
+    n: ss.length, carry: mean(carries), sd: sd(carries),
+    offAvg: mean(offs), offAbs: mean(offs.map(Math.abs)),
+    total: mean(ss.map((s) => s.total).filter((v) => v != null)),
+    clubSpeed: mean(ss.map((s) => s.clubSpeed).filter((v) => v != null)),
+    smash: mean(smash), shots: ss,
+  };
+}
+
+function renderBagTable() {
+  const rows = state.baseline.filter((b) => b.inBag).map((b) => {
+    const s = clubStats(b.club);
+    const d = s.carry != null ? s.carry - b.carry : null;
+    return `<tr><td>${esc(b.club)}</td><td>${s.n || '–'}</td><td>${fmt(s.carry)}</td><td>${b.carry}</td>
+      <td class="${d == null ? '' : d >= 0 ? 'up' : 'down'}">${signed(d)}</td><td>${s.sd != null ? '±' + fmt(s.sd) : '–'}</td>
+      <td>${s.offAvg != null ? lrText(Math.round(s.offAvg)) : '–'}</td><td>${fmt(s.clubSpeed)}</td><td>${fmt(s.smash, 2)}</td></tr>`;
+  }).join('');
+  $('#bagTable').innerHTML = `<thead><tr><th>Club</th><th>Shots</th><th>Avg carry</th><th>Typical</th><th>Δ</th><th>±</th><th>Avg miss</th><th>Club mph</th><th>Smash</th></tr></thead><tbody>${rows}</tbody>`;
+}
+
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+function renderGapChart() {
+  const clubs = state.baseline.filter((b) => b.inBag);
+  const W = 360, rowH = 24, padL = 52, padR = 34, top = 8;
+  const H = top + clubs.length * rowH + 22;
+  const max = Math.max(...clubs.map((b) => Math.max(b.carry, clubStats(b.club).carry || 0)), 50);
+  const x = (v) => padL + (v / (max * 1.05)) * (W - padL - padR);
+  const accent = css('--accent'), faint = css('--ink-faint'), ink = css('--ink-dim'), border = css('--border');
+  let g = '';
+  for (let t = 0; t <= max * 1.05; t += 50) g += `<line x1="${x(t)}" x2="${x(t)}" y1="${top}" y2="${H - 18}" stroke="${border}"/><text x="${x(t)}" y="${H - 4}" font-size="11" text-anchor="middle" fill="${faint}">${t}</text>`;
+  clubs.forEach((b, i) => {
+    const y = top + i * rowH;
+    const s = clubStats(b.club);
+    g += `<text x="${padL - 8}" y="${y + 17}" font-size="12" text-anchor="end" fill="${ink}">${esc(b.club)}</text>`;
+    g += `<rect x="${padL}" y="${y + 15}" width="${x(b.carry) - padL}" height="5" rx="2" fill="${faint}" opacity=".55"/>`;
+    if (s.carry != null) {
+      g += `<rect x="${padL}" y="${y + 4}" width="${x(s.carry) - padL}" height="10" rx="3" fill="${accent}"/>`;
+      g += `<text x="${x(s.carry) + 4}" y="${y + 13}" font-size="11" fill="${ink}">${fmt(s.carry)}</text>`;
+    }
+  });
+  const svg = $('#gapChart');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = g;
+}
+
+function renderDispersion() {
+  const club = $('#dispClub').value;
+  const b = baseFor(club);
+  const s = clubStats(club);
+  const d = s.carry != null && b ? s.carry - b.carry : null;
+  $('#dispStats').innerHTML = `
+    <div class="stat"><div class="k">Avg carry</div><div class="v">${fmt(s.carry)}</div><div class="d ${d == null ? '' : d >= 0 ? 'up' : 'down'}">${d != null ? signed(d) + ' vs typical' : '&nbsp;'}</div></div>
+    <div class="stat"><div class="k">Consistency</div><div class="v">${s.sd != null ? '±' + fmt(s.sd) : '–'}</div><div class="d">yds carry</div></div>
+    <div class="stat"><div class="k">Avg miss</div><div class="v">${s.offAbs != null ? fmt(s.offAbs) : '–'}</div><div class="d">${s.offAvg != null ? 'tends ' + (Math.abs(s.offAvg) < 1 ? 'straight' : s.offAvg < 0 ? 'left' : 'right') : 'yds offline'}</div></div>`;
+
+  const pts = s.shots.filter((x) => x.offline != null);
+  const ref = b ? b.carry : (s.carry || 150);
+  const W = 400, H = 360, cx = W / 2;
+  const allC = pts.map((p) => p.carry).concat(ref);
+  const yMin = Math.max(0, Math.floor((Math.min(...allC) - 25) / 10) * 10);
+  const yMax = Math.ceil((Math.max(...allC) + 20) / 10) * 10;
+  const xSpan = Math.max(30, ...pts.map((p) => Math.abs(p.offline) + 8));
+  const sx = (o) => cx + (o / xSpan) * (W / 2 - 24);
+  const sy = (c) => H - 24 - ((c - yMin) / (yMax - yMin)) * (H - 44);
+  const accent = css('--accent'), faint = css('--ink-faint'), border = css('--border'), fair = css('--fairway'), rough = css('--rough'), bg = css('--bg-2');
+  const fairHalf = Math.abs(sx(15) - cx); // ~30-yard-wide fairway
+  let g = `<rect x="0" y="0" width="${W}" height="${H - 20}" fill="${rough}" rx="6"/>`;
+  g += `<rect x="${cx - fairHalf}" y="0" width="${fairHalf * 2}" height="${H - 20}" fill="${fair}"/>`;
+  g += `<line x1="${cx}" x2="${cx}" y1="0" y2="${H - 20}" stroke="${faint}" stroke-dasharray="2 4"/>`;
+  for (let c = yMin; c <= yMax; c += 10) {
+    if (c % 20) continue;
+    g += `<line x1="0" x2="${W}" y1="${sy(c)}" y2="${sy(c)}" stroke="${border}"/><text x="4" y="${sy(c) - 3}" font-size="10" fill="${faint}">${c}</text>`;
+  }
+  g += `<line x1="0" x2="${W}" y1="${sy(ref)}" y2="${sy(ref)}" stroke="${faint}" stroke-width="2" stroke-dasharray="6 5"/>`;
+  g += `<text x="${W - 4}" y="${sy(ref) - 4}" font-size="10" text-anchor="end" fill="${faint}">typical ${ref}</text>`;
+  pts.forEach((p) => g += `<circle cx="${sx(p.offline)}" cy="${sy(p.carry)}" r="6" fill="${accent}" fill-opacity=".75" stroke="${bg}" stroke-width="1.5"/>`);
+  if (pts.length >= 2) {
+    const mo = mean(pts.map((p) => p.offline)), mc = mean(pts.map((p) => p.carry));
+    g += `<g stroke="${css('--ink')}" stroke-width="2"><line x1="${sx(mo) - 7}" x2="${sx(mo) + 7}" y1="${sy(mc)}" y2="${sy(mc)}"/><line x1="${sx(mo)}" x2="${sx(mo)}" y1="${sy(mc) - 7}" y2="${sy(mc) + 7}"/></g>`;
+  }
+  g += `<text x="10" y="${H - 4}" font-size="11" fill="${faint}">← Left ${Math.round(xSpan)} yds</text><text x="${W - 10}" y="${H - 4}" font-size="11" text-anchor="end" fill="${faint}">Right ${Math.round(xSpan)} yds →</text>`;
+  if (!pts.length) g += `<text x="${cx}" y="${H / 2}" font-size="13" text-anchor="middle" fill="${css('--ink-dim')}">Log ${esc(club)} shots with an offline number to see the pattern</text>`;
+  const svg = $('#dispChart');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = g;
+}
+
+function fillClubSelects() {
+  const clubs = bagClubs();
+  const ds = $('#dispClub'), hs = $('#histClub');
+  const dv = ds.value, hv = hs.value;
+  ds.innerHTML = clubs.map((c) => `<option>${esc(c)}</option>`).join('');
+  ds.value = clubs.includes(dv) ? dv : (clubs.includes('7i') ? '7i' : clubs[0]);
+  hs.innerHTML = `<option value="">All clubs</option>` + clubs.map((c) => `<option>${esc(c)}</option>`).join('');
+  hs.value = clubs.includes(hv) ? hv : '';
+}
+$('#dispClub').addEventListener('change', renderDispersion);
+$('#histClub').addEventListener('change', renderHistory);
+
+// ---- Settings --------------------------------------------------------------
+function renderBaseTable() {
+  const f = (i, k, step) => `<input type="number" inputmode="decimal" step="${step}" data-i="${i}" data-k="${k}" value="${state.baseline[i][k] ?? ''}">`;
+  $('#baseTable').innerHTML = `<thead><tr><th>Club</th><th>In bag</th><th>Carry</th><th>Club mph</th><th>Ball mph</th><th>Launch°</th><th>Spin</th></tr></thead><tbody>` +
+    state.baseline.map((b, i) => `<tr><td>${esc(b.club)}</td><td><input type="checkbox" data-i="${i}" data-k="inBag" ${b.inBag ? 'checked' : ''} style="width:22px;min-height:22px"></td>
+      <td>${f(i, 'carry', 1)}</td><td>${f(i, 'clubSpeed', 1)}</td><td>${f(i, 'ballSpeed', 1)}</td><td>${f(i, 'launch', .5)}</td><td>${f(i, 'spin', 50)}</td></tr>`).join('') + '</tbody>';
+}
+$('#baseTable').addEventListener('change', (e) => {
+  const el = e.target; const i = +el.dataset.i, k = el.dataset.k; if (!k) return;
+  if (k === 'inBag') state.baseline[i].inBag = el.checked;
+  else { const v = num(el.value); if (v == null) { el.value = state.baseline[i][k]; return; } state.baseline[i][k] = v; }
+  save(); renderAll(false);
+});
+$('#resetBase').addEventListener('click', () => {
+  if (!confirm('Reset all baseline numbers to the defaults?')) return;
+  state.baseline = structuredClone(DEFAULT_BASELINE); save(); renderAll(); toast('Baseline reset');
+});
+$('#pName').addEventListener('input', (e) => { state.player.name = e.target.value; save(); renderWho(); });
+$('#pHcp').addEventListener('input', (e) => { state.player.hcp = e.target.value; save(); renderWho(); });
+function renderWho() {
+  const p = state.player;
+  $('#who').textContent = [p.name, p.hcp !== '' && p.hcp != null ? `${p.hcp} hcp` : ''].filter(Boolean).join(' · ');
+}
+
+function download(name, text, type) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], { type }));
+  a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+const stamp = () => new Date().toISOString().slice(0, 10);
+$('#exportCsv').addEventListener('click', () => {
+  const cols = ['date', 'club', 'carry', 'total', 'offline', 'shape', 'clubSpeed', 'ballSpeed', 'launch', 'spin', 'typicalCarry', 'vsTypical', 'note'];
+  const q = (v) => v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : v;
+  const lines = state.shots.map((s) => {
+    const b = baseFor(s.club);
+    return [new Date(s.t).toISOString(), s.club, s.carry, s.total, s.offline, s.shape, s.clubSpeed, s.ballSpeed, s.launch, s.spin,
+      b?.carry, b ? s.carry - b.carry : null, s.note].map(q).join(',');
+  });
+  download(`golf-shots-${stamp()}.csv`, [cols.join(','), ...lines].join('\n'), 'text/csv');
+});
+$('#exportJson').addEventListener('click', () => download(`golf-tracker-backup-${stamp()}.json`, JSON.stringify(state, null, 2), 'application/json'));
+$('#importBtn').addEventListener('click', () => $('#importFile').click());
+$('#importFile').addEventListener('change', async (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  try {
+    const d = JSON.parse(await file.text());
+    if (!Array.isArray(d.shots) || !Array.isArray(d.baseline)) throw new Error('bad file');
+    if (!confirm(`Replace current data with ${d.shots.length} shots from this backup?`)) return;
+    state = { player: d.player || { name: '', hcp: '' }, baseline: d.baseline, shots: d.shots };
+    save(); renderAll(); toast('Backup restored');
+  } catch (err) { toast('That file is not a tracker backup'); }
+  e.target.value = '';
+});
+$('#clearAll').addEventListener('click', () => {
+  if (!state.shots.length) return toast('No shots to delete');
+  if (!confirm(`Delete all ${state.shots.length} shots? Export a backup first if unsure.`)) return;
+  state.shots = []; save(); renderAll(); toast('All shots deleted');
+});
+
+// ---- Tabs ------------------------------------------------------------------
+document.querySelectorAll('nav.tabs button').forEach((b) => b.addEventListener('click', () => {
+  document.querySelectorAll('nav.tabs button').forEach((x) => x.setAttribute('aria-selected', x === b));
+  document.querySelectorAll('section.view').forEach((v) => v.classList.toggle('active', v.id === 'view-' + b.dataset.view));
+  if (b.dataset.view === 'stats') { renderGapChart(); renderDispersion(); }
+  window.scrollTo(0, 0);
+}));
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { renderGapChart(); renderDispersion(); });
+
+// ---- Render ----------------------------------------------------------------
+function renderAll(rebuildBase = true) {
+  renderClubChips(); fillClubSelects(); renderToday(); renderHistory();
+  renderBagTable(); renderGapChart(); renderDispersion(); renderWho(); updateCompare();
+  if (rebuildBase) renderBaseTable();
+}
+$('#pName').value = state.player.name || '';
+$('#pHcp').value = state.player.hcp ?? '';
+renderAll();
+})();
+</script>
+</body>
+</html>
