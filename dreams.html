@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>D.R.E.A.M.S. — Matthew Hong</title>
-<meta name="description" content="A fully autonomous unmanned surface vehicle designed, built and field-tested in one semester at St Katharine Docks, London. Mechanical design, embedded firmware and sensor integration on a GBP 100 budget.">
+<meta name="description" content="A fully autonomous unmanned surface vehicle designed, built and field-tested in one semester at St Katharine Docks, London. Mechanical design, embedded firmware and sensor integration on a GBP 100 budget. Now in its third version, built by a team of five.">
 <meta name="author" content="Matthew Hong">
 <meta name="theme-color" content="#faf7f1">
 <link rel="canonical" href="https://matthewhong29.github.io/dreams.html">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Matthew Hong — Engineering Portfolio">
 <meta property="og:title" content="D.R.E.A.M.S. Autonomous Survey Vessel — Matthew Hong">
-<meta property="og:description" content="A fully autonomous unmanned surface vehicle designed, built and field-tested in one semester at St Katharine Docks, London. Mechanical design, embedded firmware and sensor integration on a GBP 100 budget.">
+<meta property="og:description" content="A fully autonomous unmanned surface vehicle designed, built and field-tested in one semester at St Katharine Docks, London. Mechanical design, embedded firmware and sensor integration on a GBP 100 budget. Now in its third version, built by a team of five.">
 <meta property="og:url" content="https://matthewhong29.github.io/dreams.html">
 <meta property="og:image" content="https://matthewhong29.github.io/images/dreams-st-katharine-docks.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -138,6 +138,9 @@ section.proj-section:last-child{border-bottom:none}
 .future-box-body{font-size:0.9rem;color:var(--white-dim);line-height:1.75}
 .future-box-body a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--border-accent)}
 .future-box-body strong{color:var(--white);font-weight:500}
+.v3-figure{margin:1.5rem 0 0}
+.v3-figure img{display:block;width:100%;height:auto}
+.v3-figure figcaption{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.08em;color:var(--white-dim);margin-top:0.5rem}
 
 /* BTN */
 .btn-primary{display:inline-block;background:var(--accent);color:var(--navy);font-family:var(--sans);font-weight:600;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.85rem 2rem;text-decoration:none;border-radius:2px;transition:opacity 0.2s,transform 0.2s}
@@ -234,12 +237,12 @@ body.nav-open nav{background:var(--navy)}
       <span>D.R.E.A.M.S.</span>
     </div>
     <h1 class="proj-title">D.R.E.A.M.S.<br><em>USV Project</em></h1>
-    <p class="proj-tagline">Data Recovery and Environmental Assessment for Marine Surveillance — a fully autonomous unmanned surface vehicle built with fellow co-founder Kyle Tran in one semester on a £100 budget.</p>
+    <p class="proj-tagline">Data Recovery for Environmental And Marine Surveillance — a fully autonomous unmanned surface vehicle built with fellow co-founder Kyle Tran in one semester on a £100 budget, and now in its third version.</p>
     <div class="proj-badges">
       <span class="badge">Autonomous USV</span>
       <span class="badge">Northeastern University</span>
       <span class="badge">London Scholar Program</span>
-      <span class="badge">2025–2026</span>
+      <span class="badge">2026–Present</span>
       <span class="badge">In Progress · Water Tested</span>
     </div>
     <div class="proj-hero-links">
@@ -290,7 +293,7 @@ body.nav-open nav{background:var(--navy)}
     <span class="section-label">02 — Overview</span>
     <div class="overview-grid">
       <div class="overview-body">
-        <p>D.R.E.A.M.S. is a fully autonomous unmanned surface vehicle developed to collect environmental data in degraded aquatic ecosystems. The project was conceived, designed, fabricated, and water-tested within a single semester by <strong>Kyle Tran</strong> and me, its two co-founders, as a first-year engineering project at Northeastern University's London Scholar Program. The team has since grown to four: Nolan Ting and Caleb Kong, both mechanical engineering students, joined us in fall 2026 for V3.</p>
+        <p>D.R.E.A.M.S. is a fully autonomous unmanned surface vehicle developed to collect environmental data in degraded aquatic ecosystems. The project was conceived, designed, fabricated, and water-tested within a single semester by <strong>Kyle Tran</strong> and me, its two co-founders, as a first-year engineering project at Northeastern University's London Scholar Program. The team has since grown to five for V3: Nolan Ting and Caleb Kong, both mechanical engineering students, joined us in fall 2026, and Logan Chen runs our marketing.</p>
         <p>The vessel autonomously navigates to GPS waypoints, lowers a sensor pod on a winch, takes <strong>depth-profiled water readings</strong> every 1m as it descends, confirms bottom contact via a spring-loaded mechanical switch, samples, then raises the pod and moves to the next waypoint. All data is relayed to shore via radio and logged to CSV.</p>
         <p>Every component — from the 3D-printed motor housings and structural reinforcement plates to the sensor pod enclosure and propulsion mounts — was <strong>designed in CAD and fabricated in-house</strong> using the program's makerspace. The entire system was built and tested within a £100 budget.</p>
       </div>
@@ -301,7 +304,7 @@ body.nav-open nav{background:var(--navy)}
             <li>Northeastern University, London</li>
             <li>Spring Semester 2025–2026</li>
             <li>Co-founded with <a href="https://ka1e27.github.io/Portfolio/" target="_blank" rel="noopener">Kyle Tran ↗</a></li>
-            <li>Team of four since fall 2026</li>
+            <li>Team of five since fall 2026</li>
             <li>£100 budget</li>
             <li>Water tested at St Katharine Docks</li>
           </ul>
@@ -318,7 +321,7 @@ body.nav-open nav{background:var(--navy)}
           </ul>
         </div>
         <div class="meta-card">
-          <div class="meta-card-title">Key Specs</div>
+          <div class="meta-card-title">V1 Key Specs</div>
           <ul class="meta-list">
             <li>~0.3m × 0.3m catamaran hull</li>
             <li>Under 2.5kg total weight</li>
@@ -504,12 +507,51 @@ body.nav-open nav{background:var(--navy)}
       <p>The vessel was <strong>successfully water-tested at St Katharine Docks, London</strong> — a marina adjacent to campus — following a formal access request process negotiated directly with dock management. The autonomous navigation, wireless communication, and sensor systems all performed as designed during field testing.</p>
       <p>The project demonstrated that a capable, multi-system autonomous marine platform can be engineered and deployed by a two-person first-year team within a single semester, on a constrained budget, using only makerspace resources.</p>
     </div>
+  </section>
+
+  <!-- V3 -->
+  <section class="proj-section fade-up" id="v3">
+    <span class="section-label">07 — V3 · In Build</span>
+    <h2 class="section-title">From a one-semester build to a survey platform.</h2>
+    <div class="outcome-body">
+      <p>V1 proved the idea. <strong>V3 is a ground-up redesign</strong>: a modular survey boat that labs, watershed groups and ports can send out to see what's in their water. It's being built by a team of five, PCBWay sponsors our circuit boards, and the project now has its own <a href="https://ka1e27.github.io/dreams/" target="_blank" rel="noopener" style="color:var(--accent)">official site ↗</a> with a build log and weekly updates.</p>
+    </div>
+    <figure class="v3-figure">
+      <img src="images/dreams-v3-model.png" alt="The V3 SolidWorks model: two red hulls with white lids, joined by an arched bridge" width="1200" height="675" loading="lazy">
+      <figcaption>V3's SolidWorks model, which the project site shows in 3D</figcaption>
+    </figure>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-card-title">My Work on V3</div>
+        <div class="tech-card-body">
+          <ul>
+            <li>Designed V3's hull, bridge and drive layout: twin 940&nbsp;mm hulls, each an open tub and a lid printed in one piece on a large-format printer, joined by an arched aluminum bridge with aluminum reinforcement where the loads are highest, and belt-driven outdrives</li>
+            <li>Sized the design with a model of its buoyancy, stability, structural loads and drag; the team's first CFD (computer flow simulation) runs came in within about 20% of it</li>
+            <li>Put the boat's SolidWorks model on the project site as an interactive 3D viewer: spin it, take it apart and slice through the hulls and bridge</li>
+            <li>Planning and communications, including the weekly progress updates and our talks with the Marine Science Institute in Redwood City, CA, about a program for their students</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-title">V3 at a Glance</div>
+        <div class="tech-card-body">
+          <ul>
+            <li>Twin-hull catamaran, 940&nbsp;mm long and 733&nbsp;mm wide, with the hull centers 500&nbsp;mm apart</li>
+            <li>3D-printed PLA hulls sealed with epoxy, a 6061 aluminum bridge and machined metal motor mounts</li>
+            <li>A Raspberry Pi 5 computer and two Raspberry Pi Pico 2 controllers on a custom 4-layer circuit board</li>
+            <li>Two brushless motors driving the propellers through 2:1 belts, on two 10S lithium-ion packs</li>
+            <li>A looped-blade (toroidal) propeller tuned over nearly 50 CFD runs, cutting the power it needs at a 2.5-knot cruise from about 47&nbsp;W to 26&nbsp;W</li>
+            <li>A tethered sensor pod and a fish-finder sonar for depth, with 4G telemetry to a live map and a hand-held radio override</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="future-box">
-      <div class="future-box-title">Future Development</div>
+      <div class="future-box-title">Where It's Heading</div>
       <div class="future-box-body">
-        The current version, V3, is in build now, and the project has its own <a href="https://ka1e27.github.io/dreams/" target="_blank" rel="noopener">official site ↗</a> with the build log, the V3 design and the roadmap.
-        <br><br>
         V3 is being designed around real field needs, starting with two conversations: with the <strong>Charles River Watershed Association (CRWA)</strong> about collecting water-quality data for them, and with the <strong>Port of Oakland</strong> about sediment sampling. Both showed that sediment samples are still collected by sending divers down, which is shaping the long-term plan for a sample-collection arm.
+        <br><br>
+        The first data will be water temperature, depth and GPS location, from sensors factory-tested against national measurement standards (NIST-traceable). The team will test in the lab until the boat is ready, then on the water.
         <br><br>
         To finish V3, the team is looking for funding, a mentor in the field and fabrication partners; the <a href="https://ka1e27.github.io/dreams/partners.html" target="_blank" rel="noopener">partners page ↗</a> has the details.
       </div>
